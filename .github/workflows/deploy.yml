@@ -7,26 +7,7 @@ on:
 
 jobs:
 
-  failure:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
-    steps:
-      - run: echo 'Tests failed.'
-
-  exit:
-    needs: failure
-    runs-on: ubuntu-latest
-    steps:
-      - run: exit 1
-
-  success:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    steps:
-      - run: echo 'Tests completed successfully.'
-
-  deploy-to-vercel:
-    needs: success
+  deploy-to-vercel-prod:
     runs-on: ubuntu-latest
 
     steps:
