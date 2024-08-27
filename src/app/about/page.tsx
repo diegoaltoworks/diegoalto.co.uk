@@ -13,7 +13,7 @@ const MARKDOWN_URL = "https://raw.githubusercontent.com/diegoaltoworks/diegoalto
 const getMarkdown = async () => {
 	return fetch(MARKDOWN_URL).then((res) => res.text());
 }
-export default async function ContactPage() {
+export default async function AboutPage() {
 	const md = await getMarkdown();
 	const html = await marked.parse(md)
 	return (
