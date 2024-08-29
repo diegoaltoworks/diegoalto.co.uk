@@ -1,23 +1,23 @@
-import "./globals.css";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import React from "react";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
+import "./globals.css";
+import { Inter } from "next/font/google";
+import type { Metadata } from "next";
+import { constants } from "@/lib/constants";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "Diego Alto",
-	description: "Software Engineer",
+	...constants
 };
 
-export default function RootLayout({
-	children,
-}: {
-  children: React.ReactNode;
-}) {
-	return (
-		<html lang="en">
-			<body className={inter.className}>{children}</body>
-		</html>
-	);
-}
+
+const RootLayout = ({ children }: React.PropsWithChildren) => (
+	<html lang="en">
+		<body>
+			<AntdRegistry><body className={inter.className}>{children}</body></AntdRegistry>
+		</body>
+	</html>
+);
+
+export default RootLayout;
