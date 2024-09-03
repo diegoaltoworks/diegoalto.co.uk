@@ -9,7 +9,6 @@ import {
 import { contactSchema } from "@/lib/types/contact";
 
 const {
-	SITE_NAME,
 	EMAIL_SENDER,
 	EMAIL_DOMAIN,
 	EMAIL_APIKEY,
@@ -37,7 +36,7 @@ export const contact = NextActionErrorWrapper(async (data: any) => {
 		from: EMAIL_POSTMAN,
 		to: EMAIL_RECIPIENT,
 		replyto: `${data.name} <${data.email}>`,
-		subject: `Message from ${data.name} - ${SITE_NAME}`,
+		subject: `Message from ${data.name}`,
 		html: [
 			data.name ?? `name: ${data.name}`,
 			data.phone ?? `phone: ${data.phone}`,

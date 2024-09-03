@@ -82,6 +82,6 @@ test.describe("Contact page", () => {
 	test("valid submission", async () => {
 		await fillForm({ ...goodData });
 		await submitForm();
-		await expectedErrorMessages(["Invalid phone"]);
+		await expect(page.getByTestId("success-message")).toBeVisible();
 	});
 });

@@ -6,8 +6,8 @@ import { useForm, Controller } from "react-hook-form";
 import { Button, TextField } from "@mui/material";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactSchema, IContact } from "@/lib/types/contact";
-import styles from "./ContactForm.module.scss";
 import { AppError, ExternalError } from "@/lib/errors";
+import styles from "./ContactForm.module.scss";
 
 const defaultValues = {
 	name: "",
@@ -61,7 +61,7 @@ export const ContactForm = () => {
 	return (
 		<div className={styles.wrap}>
 			{success ? (
-				<>
+				<div data-testid="success-message">
 					<p>Thank you for your message.</p>
 					<p>I'll get back to you shortly.</p>
 					<Button
@@ -72,7 +72,7 @@ export const ContactForm = () => {
 					>
 						Send another message
 					</Button>
-				</>
+				</div>
 			) : (
 				<form
 					className={styles.form}

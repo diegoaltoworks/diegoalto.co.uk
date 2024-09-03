@@ -3,6 +3,15 @@ import { z } from "zod";
 const isPhone = (s: string) => /^[+]?[0-9\(\)\-\s]+$/.test(s.trim());
 const isEmail = (s: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.trim());
 
+const cleanPhone = (s: string) => s.trim().replace(/[^0-9]+/g, "");
+const cleanEmail = (s: string) => s.trim().toLowerCase();
+
+const cleanContact = (data: any) => ({
+	...data,
+	email: cleanEmail(data.email),
+	phone: cleanPhone(data.phone),
+});
+
 export const contactSchema = z
 	.object({
 		name: z
@@ -26,10 +35,6 @@ export const contactSchema = z
 			.min(30, { message: "Message should be at least 30 characters" })
 			.max(500, { message: "Message should be less than 500 characters" }),
 	})
-	.transform((data) => ({
-		...data,
-		email: data.email.trim().toLowerCase(),
-		phone: data.phone.trim().replace(/[^0-9]+/g, ""),
-	}));
+	.transform(cleanContact);
 
 export interface IContact extends z.infer<typeof contactSchema> {}
