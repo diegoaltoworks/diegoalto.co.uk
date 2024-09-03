@@ -1,21 +1,22 @@
 import React from "react";
-import { AntdRegistry } from "@ant-design/nextjs-registry";
-import "./globals.css";
+import Metadata from "@/lib/metadata";
 import { Inter } from "next/font/google";
-import type { Metadata } from "next";
-import { constants } from "@/lib/constants";
-
+import "./globals.css";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-	...constants
-};
-
+export const metadata = Metadata;
 
 const RootLayout = ({ children }: React.PropsWithChildren) => (
 	<html lang="en">
-		<body>
-			<AntdRegistry><body className={inter.className}>{children}</body></AntdRegistry>
+		<head>
+			<link
+				href="https://fonts.googleapis.com/icon?family=Material+Icons"
+				rel="stylesheet"
+			></link>
+		</head>
+		<body className={inter.className}>
+			<AppRouterCacheProvider>{children}</AppRouterCacheProvider>
 		</body>
 	</html>
 );
