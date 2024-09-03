@@ -76,12 +76,10 @@ export const NextAPIHandlerErrorWrapper = (
 	return async (req: NextApiRequest, res: NextApiResponse) => {
 		// our own error boundary
 		try {
-			//console.error("NextAPIHandlerErrorWrapper Exec:", {req});
 			const result = res.json(await handler(req, res));
 			res.status(200).json(result);
 		} catch (error: Error | any) {
 			if (error?.isOperationalError) {
-				//console.error("NextAPIHandlerErrorWrapper Caught Error:", error);
 				res
 					.status(error.statusCode || 500)
 					.json({ error: error.message, type: error.type, info: error.info });
@@ -99,10 +97,9 @@ export const NextActionErrorWrapper = (handler: Function): Function => {
 		let result;
 		// our own error boundary
 		try {
-			//console.error("NextActionErrorWrapper Exec:", data);
 			result = await handler(data);
+			return result;
 		} catch (error: Error | any) {
-			//console.error("NextActionErrorWrapper Caught Error:", error);
 			if (error?.isOperationalError) {
 				result = {
 					status: error.statusCode || 500,

@@ -1,28 +1,35 @@
 import { z } from "zod";
 
-export const contactSchema = z.object({
-	name: z
-		.string()
-		.min(1, { message: "Required" }) // Equivalent to required: true
-		.max(30, { message: "Name should be less than 30 characters" }),
+const isPhone = (s: string) => /^[+]?[0-9\(\)\-\s]+$/.test(s.trim());
+const isEmail = (s: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.trim());
 
-	email: z
-		.string()
-		.min(1, { message: "Required" }) // Equivalent to required: true
-		.regex(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, {
-			message: "Invalid email address",
-		}),
+export const contactSchema = z
+	.object({
+		name: z
+			.string()
+			.min(1, { message: "Required" })
+			.max(30, { message: "Name should be less than 30 characters" }),
 
-	phone: z
-		.string()
-		.min(1, { message: "Required" }) // Equivalent to required: true
-		.regex(/^[0-9]+$/i, { message: "Invalid phone number" }),
+		email: z
+			.string()
+			.min(1, { message: "Required" })
+			.refine(isEmail, { message: "Invalid email address" }),
 
-	message: z
-		.string()
-		.min(1, { message: "Required" }) // Equivalent to required: true
-		.min(30, { message: "Message should be at least 30 characters" })
-		.max(500, { message: "Message should be less than 500 characters" }), // Ensuring max length for the TextArea
-});
+		phone: z
+			.string()
+			.min(1, { message: "Required" })
+			.refine(isPhone, { message: "Invalid phone number" }),
+
+		message: z
+			.string()
+			.min(1, { message: "Required" })
+			.min(30, { message: "Message should be at least 30 characters" })
+			.max(500, { message: "Message should be less than 500 characters" }),
+	})
+	.transform((data) => ({
+		...data,
+		email: data.email.trim().toLowerCase(),
+		phone: data.phone.trim().replace(/[^0-9]+/g, ""),
+	}));
 
 export interface IContact extends z.infer<typeof contactSchema> {}

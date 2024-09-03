@@ -8,9 +8,14 @@ import {
 } from "@/lib/errors";
 import { contactSchema } from "@/lib/types/contact";
 
-const EMAIL_SENDER = process.env.EMAIL_SENDER;
-const EMAIL_DOMAIN = process.env.EMAIL_DOMAIN;
-const EMAIL_APIKEY = process.env.EMAIL_APIKEY;
+const {
+	SITE_NAME,
+	EMAIL_SENDER,
+	EMAIL_DOMAIN,
+	EMAIL_APIKEY,
+	EMAIL_POSTMAN,
+	EMAIL_RECIPIENT,
+} = process.env;
 
 export const contact = NextActionErrorWrapper(async (data: any) => {
 	if (!EMAIL_SENDER) throw new ConfigError("Missing mail service SENDER");
@@ -29,10 +34,10 @@ export const contact = NextActionErrorWrapper(async (data: any) => {
 	}
 
 	const message = {
-		from: process.env.EMAIL_FROM,
-		to: process.env.EMAIL_TO,
-		replyto: data.email,
-		subject: `Message from ${data.name} - ${process.env.SITE_NAME}`,
+		from: EMAIL_POSTMAN,
+		to: EMAIL_RECIPIENT,
+		replyto: `${data.name} <${data.email}>`,
+		subject: `Message from ${data.name} - ${SITE_NAME}`,
 		html: [
 			data.name ?? `name: ${data.name}`,
 			data.phone ?? `phone: ${data.phone}`,
@@ -55,7 +60,9 @@ export const contact = NextActionErrorWrapper(async (data: any) => {
 	};
 
 	try {
-		await fetch(endpoint, payload);
+		const response = await fetch(endpoint, payload);
+		const result = await response.json();
+		console.log("RESULT!", { result });
 		return { ok: 1 };
 	} catch (error) {
 		throw new ExternalError("Mail service error", error);
