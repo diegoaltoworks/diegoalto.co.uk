@@ -45,43 +45,36 @@ test.afterAll(async () => {
 	await page.close();
 });
 
-test.describe("Contact page", () => {
-	test("has title", async () => {
-		// Expect a title "to contain" a substring.
-		await expect(page).toHaveTitle(new RegExp(`${metadata.title}`));
-	});
+test("has title", async () => {
+	// Expect a title "to contain" a substring.
+	await expect(page).toHaveTitle(new RegExp(`${metadata.title}`));
+});
 
-	test("renders form", async () => {
-		// Expects page to have a heading with the name of Installation.
-		await expect(page.getByTestId("contact-form")).toBeVisible();
-	});
+test("renders form", async () => {
+	// Expects page to have a heading with the name of Installation.
+	await expect(page.getByTestId("contact-form")).toBeVisible();
+});
 
-	test("required fieldsa error", async () => {
-		await fillForm({ ...blankData });
-		await submitForm();
-		await expectedErrorMessages([
-			"Required",
-			"Required",
-			"Required",
-			"Required",
-		]);
-	});
+test("required fieldsa error", async () => {
+	await fillForm({ ...blankData });
+	await submitForm();
+	await expectedErrorMessages(["Required", "Required", "Required", "Required"]);
+});
 
-	test("invalid email error", async () => {
-		await fillForm({ ...goodData, email: "invalid email" });
-		await submitForm();
-		await expectedErrorMessages(["Invalid email"]);
-	});
+test("invalid email error", async () => {
+	await fillForm({ ...goodData, email: "invalid email" });
+	await submitForm();
+	await expectedErrorMessages(["Invalid email"]);
+});
 
-	test("invalid phone error", async () => {
-		await fillForm({ ...goodData, phone: "invalid phone" });
-		await submitForm();
-		await expectedErrorMessages(["Invalid phone"]);
-	});
+test("invalid phone error", async () => {
+	await fillForm({ ...goodData, phone: "invalid phone" });
+	await submitForm();
+	await expectedErrorMessages(["Invalid phone"]);
+});
 
-	test("valid submission", async () => {
-		await fillForm({ ...goodData });
-		await submitForm();
-		await expect(page.getByTestId("success-message")).toBeVisible();
-	});
+test("valid submission", async () => {
+	await fillForm({ ...goodData });
+	await submitForm();
+	await expect(page.getByTestId("success-message")).toBeVisible();
 });
