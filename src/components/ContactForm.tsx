@@ -5,7 +5,7 @@ import { contact } from "@/app/actions/contact";
 import { useForm, Controller } from "react-hook-form";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { contactSchema, IContact } from "@/lib/types/contact";
+import { contactSchema, IContact, KContact } from "@/lib/types/contact";
 import { AppError, ExternalError } from "@/lib/errors";
 
 const defaultValues = {
@@ -47,7 +47,7 @@ export const ContactForm = () => {
 			});
 			Object.keys(errors).forEach((key) => {
 				console.error("ContactForm Error:", key, errors[key]);
-				setError(key as keyof IContact, { message: errors[key] });
+				setError(key as KContact, { message: errors[key] });
 			});
 		} catch (error: AppError | any) {
 			console.error("ContactForm Error:", error);
