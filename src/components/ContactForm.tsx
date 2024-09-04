@@ -137,18 +137,20 @@ export const ContactForm = () => {
 								/>
 							)}
 						/>
+						<Box sx={{ textAlign: "right" }}>
+							<Typography sx={{ color: "primary.main" }}>
+								{isSubmitting && isDirty && "Submitting..."}
+							</Typography>
+							<Button
+								disabled={isSubmitting && isDirty}
+								variant="contained"
+								type="submit"
+								data-testid="submit-button"
+							>
+								Submit
+							</Button>
+						</Box>
 					</Box>
-					<Button
-						disabled={isSubmitting && isDirty}
-						variant="contained"
-						type="submit"
-						data-testid="submit-button"
-					>
-						Submit
-					</Button>
-					<Typography sx={{ color: "primary.main" }}>
-						{isSubmitting && isDirty && "Submitting..."}
-					</Typography>
 				</form>
 			)}
 		</>
