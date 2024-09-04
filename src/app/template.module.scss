@@ -13,10 +13,14 @@ $buffer: 20px;
 }
 .main {
 	display: flex;
+	flex-direction: column;
 	width: 100%;
 	min-height: calc(100vh - $header-height - $footer-height - (2 * $buffer));
 	position: relative;
 	top: $header-height + $buffer;
+	padding: 0 20px;
+	margin: 0 auto;
+	max-width: 800px;
 	padding-bottom: $footer-height + $buffer;
 }
 .header {

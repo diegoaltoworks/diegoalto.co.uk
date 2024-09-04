@@ -5,6 +5,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { SwipeableDrawer } from "@mui/material";
 import { Menu } from "./Navigation/Menu";
 import { useBodyClass } from "@/hooks/useBodyClass";
+import { Actions } from "./Navigation/Actions";
 
 export const Navigation: React.FC = () => {
 	const [state, setState] = React.useState<{ open: boolean }>({ open: false });
@@ -44,7 +45,17 @@ export const Navigation: React.FC = () => {
 				onClose={toggleDrawer(false)}
 				onOpen={toggleDrawer(true)}
 			>
-				<Menu />
+				<Box
+					sx={{
+						display: "grid",
+						height: "100%",
+						gridTemplateRows: "auto 60px",
+						width: 300,
+					}}
+				>
+					<Menu />
+					<Actions />
+				</Box>
 			</SwipeableDrawer>
 		</>
 	);

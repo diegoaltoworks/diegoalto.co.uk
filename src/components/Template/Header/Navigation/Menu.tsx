@@ -39,7 +39,7 @@ const menu = {
 
 export const Menu: React.FC = () => {
 	return (
-		<List>
+		<List sx={{ width: "100%" }}>
 			{menu.main.items.map(({ text, link, icon }, index) => (
 				<ListItem key={text} disablePadding>
 					<ListItemButton component={Link} href={link}>

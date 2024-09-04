@@ -5,6 +5,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { Theme } from "@/components/Template/Theme";
 const inter = Inter({ subsets: ["latin"] });
 import "./layout.scss";
+import { CssBaseline } from "@mui/material";
 
 export const metadata = Metadata;
 
@@ -18,6 +19,7 @@ const RootLayout = ({ children }: React.PropsWithChildren) => (
 		</head>
 		<body className={inter.className}>
 			<AppRouterCacheProvider>
+				<CssBaseline />
 				<Theme>{children}</Theme>
 			</AppRouterCacheProvider>
 		</body>

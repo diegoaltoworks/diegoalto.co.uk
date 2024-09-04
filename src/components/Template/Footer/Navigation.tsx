@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-import EmailIcon from "@mui/icons-material/Email";
-import ConstructionIcon from "@mui/icons-material/Construction";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { useRouter, usePathname } from "next/navigation";
+
+import icons from "@/components/Template/Icons";
+const { HomeIcon, ContactIcon, ProjectsIcon, AboutIcon } = icons;
 
 export const Navigation: React.FC = () => {
 	const pathname = usePathname();
@@ -33,17 +33,17 @@ export const Navigation: React.FC = () => {
 			<BottomNavigationAction
 				value="/about"
 				label="About"
-				icon={<AccountBoxIcon />}
+				icon={<AboutIcon />}
 			/>
 			<BottomNavigationAction
 				value="/projects"
 				label="Projects"
-				icon={<ConstructionIcon />}
+				icon={<ProjectsIcon />}
 			/>
 			<BottomNavigationAction
 				value="/contact"
 				label="Contact"
-				icon={<EmailIcon />}
+				icon={<ContactIcon />}
 			/>
 		</BottomNavigation>
 	);
