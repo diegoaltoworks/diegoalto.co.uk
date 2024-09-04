@@ -1,26 +1,39 @@
-.wrap {
-  display: grid;
-  grid-template-rows: auto 100px;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 0 20px;
-}
-.main{
-  display: flex;
-  justify-items: center;
-	padding-bottom: 100px;
-  width: calc(100vw - 40px);
-  max-width:800px;
-  margin: 0 auto;
-}
-.menu{
-  display: flex;
-}
-.background{
-	  background:
-    linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), /* White overlay with 50% opacity */
-    url('/logo.jpg'); /* Background image */
-  	background-size: cover; /* Cover the entire element */
-  background-position: center; /* Center the background image */
+$header-height: 60px;
+$footer-height: 60px;
+$buffer: 20px;
 
+@mixin dont-print() {
+	@media print {
+		display: none;
+	}
+}
+
+.wrap {
+	display: flex;
+}
+.main {
+	display: flex;
+	width: 100%;
+	min-height: calc(100vh - $header-height - $footer-height - (2 * $buffer));
+	position: relative;
+	top: $header-height + $buffer;
+	padding-bottom: $footer-height + $buffer;
+}
+.header {
+	@include dont-print;
+	display: flex;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	height: $header-height;
+}
+.footer {
+	@include dont-print;
+	display: flex;
+	width: 100%;
+	height: $footer-height;
+	position: fixed;
+	bottom: 0;
+	background: #fff;
+	font-size: 70%;
 }

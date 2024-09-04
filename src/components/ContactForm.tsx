@@ -3,11 +3,10 @@
 import React from "react";
 import { contact } from "@/app/actions/contact";
 import { useForm, Controller } from "react-hook-form";
-import { Button, TextField } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactSchema, IContact } from "@/lib/types/contact";
 import { AppError, ExternalError } from "@/lib/errors";
-import styles from "./ContactForm.module.scss";
 
 const defaultValues = {
 	name: "",
@@ -59,12 +58,20 @@ export const ContactForm = () => {
 	};
 
 	return (
-		<div className={styles.wrap}>
+		<>
 			{success ? (
-				<div data-testid="success-message">
-					<p>Thank you for your message.</p>
-					<p>I'll get back to you shortly.</p>
+				<Box
+					sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+					data-testid="success-message"
+				>
+					<Typography sx={{ color: "primary.main", fontWeight: "bold" }}>
+						{`Thank you for your message.`}
+					</Typography>
+					<Typography sx={{ color: "primary.main" }}>
+						{`I'll get back to you shortly.`}
+					</Typography>
 					<Button
+						variant="contained"
 						onClick={() => {
 							reset();
 							setSuccess(false);
@@ -72,67 +79,65 @@ export const ContactForm = () => {
 					>
 						Send another message
 					</Button>
-				</div>
+				</Box>
 			) : (
-				<form
-					className={styles.form}
-					onSubmit={handleSubmit(onSubmit)}
-					data-testid="contact-form"
-				>
-					<Controller
-						control={control}
-						name="name"
-						render={({ field, fieldState: { error } }) => (
-							<TextField
-								label="Name"
-								variant="outlined"
-								error={Boolean(error)}
-								helperText={error?.message}
-								{...field}
-							/>
-						)}
-					/>
-					<Controller
-						control={control}
-						name="email"
-						render={({ field, fieldState: { error } }) => (
-							<TextField
-								label="Email"
-								type="email"
-								variant="outlined"
-								error={Boolean(error)}
-								helperText={error?.message}
-								{...field}
-							/>
-						)}
-					/>
-					<Controller
-						control={control}
-						name="phone"
-						render={({ field, fieldState: { error } }) => (
-							<TextField
-								label="Phone"
-								type="phone"
-								variant="outlined"
-								error={Boolean(error)}
-								helperText={error?.message}
-								{...field}
-							/>
-						)}
-					/>
-					<Controller
-						control={control}
-						name="message"
-						render={({ field, fieldState: { error } }) => (
-							<TextField
-								label="Message"
-								variant="outlined"
-								error={Boolean(error)}
-								helperText={error?.message}
-								{...field}
-							/>
-						)}
-					/>
+				<form onSubmit={handleSubmit(onSubmit)} data-testid="contact-form">
+					<Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+						<Controller
+							control={control}
+							name="name"
+							render={({ field, fieldState: { error } }) => (
+								<TextField
+									label="Name"
+									variant="outlined"
+									error={Boolean(error)}
+									helperText={error?.message}
+									{...field}
+								/>
+							)}
+						/>
+						<Controller
+							control={control}
+							name="email"
+							render={({ field, fieldState: { error } }) => (
+								<TextField
+									label="Email"
+									type="email"
+									variant="outlined"
+									error={Boolean(error)}
+									helperText={error?.message}
+									{...field}
+								/>
+							)}
+						/>
+						<Controller
+							control={control}
+							name="phone"
+							render={({ field, fieldState: { error } }) => (
+								<TextField
+									label="Phone"
+									type="phone"
+									variant="outlined"
+									error={Boolean(error)}
+									helperText={error?.message}
+									{...field}
+								/>
+							)}
+						/>
+						<Controller
+							control={control}
+							name="message"
+							render={({ field, fieldState: { error } }) => (
+								<TextField
+									label="Message"
+									variant="outlined"
+									error={Boolean(error)}
+									helperText={error?.message}
+									{...field}
+								/>
+							)}
+						/>
+					</Box>
 					<Button
 						disabled={isSubmitting && isDirty}
 						variant="contained"
@@ -141,8 +146,11 @@ export const ContactForm = () => {
 					>
 						Submit
 					</Button>
+					<Typography sx={{ color: "primary.main" }}>
+						{isSubmitting && isDirty && "Submitting..."}
+					</Typography>
 				</form>
 			)}
-		</div>
+		</>
 	);
 };
