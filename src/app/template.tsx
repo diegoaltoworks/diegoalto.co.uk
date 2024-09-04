@@ -1,14 +1,26 @@
-import React from "react"
-import styles from "./template.module.css"
-import { Menu } from "@/components/Menu"
+"use client";
+import React from "react";
+import { Header } from "@/components/Template/Header";
+import { Footer } from "@/components/Template/Footer";
+import { HideOnScroll } from "@/components/Template/HideOnScroll";
+import styles from "./template.module.scss";
 
-export default function Template({children}:{children:React.ReactNode}) {
+const App: React.FC = ({ children }: React.PropsWithChildren) => {
 	return (
-		<main className={styles.wrap}>
+		<div className={styles.wrap}>
 			<div className={styles.main}>{children}</div>
-			<div className={styles.menu}>
-				<Menu/>
-			</div>
-		</main>
-	)
-}
+			<HideOnScroll direction="up">
+				<div className={styles.header}>
+					<Header />
+				</div>
+			</HideOnScroll>
+			<HideOnScroll direction="down">
+				<div className={styles.footer}>
+					<Footer />
+				</div>
+			</HideOnScroll>
+		</div>
+	);
+};
+
+export default App;

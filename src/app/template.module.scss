@@ -1,0 +1,43 @@
+$header-height: 60px;
+$footer-height: 60px;
+$buffer: 20px;
+
+@mixin dont-print() {
+	@media print {
+		display: none;
+	}
+}
+
+.wrap {
+	display: flex;
+}
+.main {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	min-height: calc(100vh - $header-height - $footer-height - (2 * $buffer));
+	position: relative;
+	top: $header-height + $buffer;
+	padding: 0 20px;
+	margin: 0 auto;
+	max-width: 800px;
+	padding-bottom: $footer-height + $buffer;
+}
+.header {
+	@include dont-print;
+	display: flex;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	height: $header-height;
+}
+.footer {
+	@include dont-print;
+	display: flex;
+	width: 100%;
+	height: $footer-height;
+	position: fixed;
+	bottom: 0;
+	background: #fff;
+	font-size: 70%;
+}

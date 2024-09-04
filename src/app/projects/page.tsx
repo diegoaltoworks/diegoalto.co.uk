@@ -1,14 +1,15 @@
 import React from "react";
-import { ContactForm } from "@/components/ContactForm";
 import styles from "./page.module.scss";
+import { useQuery } from "@tanstack/react-query";
+import { Projects } from "./Projects";
 
-export default function ContactPage() {
+export default function ProjectsPage() {
 	return (
 		<main className={styles.main} data-testid="page-body">
 			<h1 className={styles.title} data-testid="page-title">
-				Contact
+				Projects
 			</h1>
-			<ContactForm />
+			<Projects />
 		</main>
 	);
 }

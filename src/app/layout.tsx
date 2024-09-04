@@ -1,23 +1,29 @@
-import "./globals.css";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import React from "react";
-
+import Metadata from "@/lib/metadata";
+import { Inter } from "next/font/google";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+import { Theme } from "@/components/Template/Theme";
 const inter = Inter({ subsets: ["latin"] });
+import "./layout.scss";
+import { CssBaseline } from "@mui/material";
 
-export const metadata: Metadata = {
-	title: "Diego Alto",
-	description: "Software Engineer",
-};
+export const metadata = Metadata;
 
-export default function RootLayout({
-	children,
-}: {
-  children: React.ReactNode;
-}) {
-	return (
-		<html lang="en">
-			<body className={inter.className}>{children}</body>
-		</html>
-	);
-}
+const RootLayout = ({ children }: React.PropsWithChildren) => (
+	<html lang="en">
+		<head>
+			<link
+				href="https://fonts.googleapis.com/icon?family=Material+Icons"
+				rel="stylesheet"
+			></link>
+		</head>
+		<body className={inter.className}>
+			<AppRouterCacheProvider>
+				<CssBaseline />
+				<Theme>{children}</Theme>
+			</AppRouterCacheProvider>
+		</body>
+	</html>
+);
+
+export default RootLayout;
