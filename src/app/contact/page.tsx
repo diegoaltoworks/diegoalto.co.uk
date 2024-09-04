@@ -4,9 +4,11 @@ import styles from "./page.module.scss";
 
 export default function ContactPage() {
 	return (
-		<>
-			<h1>Contact</h1>
+		<main className={styles.main} data-testid="page-body">
+			<h1 className={styles.title} data-testid="page-title">
+				Contact
+			</h1>
 			<ContactForm />
-		</>
+		</main>
 	);
 }
