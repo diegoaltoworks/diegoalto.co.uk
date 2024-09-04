@@ -38,3 +38,7 @@ export const contactSchema = z
 	.transform(cleanContact);
 
 export interface IContact extends z.infer<typeof contactSchema> {}
+
+// TODO: why can't I just do this? urgh
+// export type KContact = keyof IContact;
+export type KContact = "name" | "email" | "phone" | "message";
