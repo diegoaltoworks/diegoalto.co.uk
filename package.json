@@ -22,6 +22,7 @@
     "@mui/icons-material": "^6.0.2",
     "@mui/material": "^6.0.2",
     "@mui/material-nextjs": "^6.0.1",
+    "@sentry/nextjs": "^8.28.0",
     "@tanstack/react-query": "^5.54.1",
     "@testing-library/jest-dom": "^6.5.0",
     "@vitest/coverage-v8": "^2.0.5",
@@ -34,6 +35,8 @@
     "remove": "^0.1.5",
     "sass": "^1.77.8",
     "typescript": "5.4.5",
+    "winston": "^3.14.2",
+    "winston-transport-sentry-node": "^3.0.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

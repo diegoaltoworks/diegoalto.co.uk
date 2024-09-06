@@ -1,18 +1,20 @@
-"use client" // Error boundaries must be Client Components
+"use client"; // Error boundaries must be Client Components
 
-import { useEffect } from "react"
+import * as Sentry from "@sentry/nextjs";
+import Error from "next/error";
+import { useEffect } from "react";
 
-export default function Error({
+export default function GlobalError({
 	error,
 	reset,
 }: {
-  error: Error & { digest?: string }
-  reset: () => void
+	error: Error & { digest?: string };
+	reset: () => void;
 }) {
 	useEffect(() => {
-		// Log the error to an error reporting service
-		console.error(error)
-	}, [error])
+		Sentry.captureException(error);
+		console.error(error);
+	}, [error]);
 
 	return (
 		<div>
@@ -23,8 +25,8 @@ export default function Error({
 					() => reset()
 				}
 			>
-        Try again
+				Try again
 			</button>
 		</div>
-	)
+	);
 }

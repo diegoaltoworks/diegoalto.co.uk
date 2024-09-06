@@ -1,11 +1,7 @@
 "use server";
 
-import {
-	ConfigError,
-	ExternalError,
-	InputError,
-	NextActionErrorWrapper,
-} from "@/lib/errors";
+import { NextActionErrorWrapper } from "@/lib/error.handlers";
+import { ConfigError, ExternalError, InputError } from "@/lib/errors";
 import { contactSchema } from "@/lib/types/contact";
 
 const {
