@@ -93,6 +93,7 @@ test.describe("contact page valid submission", () => {
 	test("valid submission", async () => {
 		await fillContactForm({ ...goodData });
 		await submitContactForm();
+		await page.waitForTimeout(3000);
 		await expect(page.getByTestId("success-message")).toBeVisible();
 	});
 });
