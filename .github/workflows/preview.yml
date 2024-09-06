@@ -5,35 +5,34 @@ on:
     workflows: ["PR Test and Build"]
 
 jobs:
-
-  failure:
+  pr-test-failure:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
       - run: echo 'Tests failed.'
 
-  exit:
-    needs: failure
+  abort-preview:
+    needs: pr-test-failure
     runs-on: ubuntu-latest
     steps:
       - run: exit 1
 
-  success:
+  pr-test-success:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - run: echo 'Tests completed successfully.'
 
-  deploy-to-vercel-preview:
-    needs: success
+  deploy-preview:
+    needs: pr-test-success
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_branch }}  # Checkout the PR branch
-          fetch-depth: 0  # Optionally fetch all history for the repository
+          ref: ${{ github.event.workflow_run.head_branch }} # Checkout the PR branch
+          fetch-depth: 0 # Optionally fetch all history for the repository
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
