@@ -2,7 +2,7 @@ name: PR Test and Build
 
 on:
   pull_request:
-    types: [opened, reopened]
+    types: [opened, reopened, synchronize]
 
 jobs:
   test:
@@ -25,6 +25,9 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Install Playwright Browsers
+        run: npm i playwright install --with-deps
 
       - name: Run e2e tests
         run: npm run test:e2e
