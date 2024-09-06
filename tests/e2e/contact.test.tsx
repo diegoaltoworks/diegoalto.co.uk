@@ -91,9 +91,14 @@ test.describe("contact page valid submission", () => {
 	});
 
 	test("valid submission", async () => {
+		await page.route("**/contact", (route) =>
+			route.fulfill({
+				status: 200,
+				body: JSON.stringify({ ok: 1 }),
+			})
+		);
 		await fillContactForm({ ...goodData });
 		await submitContactForm();
-		await page.waitForTimeout(3000);
 		await expect(page.getByTestId("success-message")).toBeVisible();
 	});
 });
