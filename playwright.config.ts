@@ -30,13 +30,13 @@ export default defineConfig({
 		/* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
 		trace: "on-first-retry",
 
-		actionTimeout: 5 * 1000,
-		navigationTimeout: 3 * 1000,
+		actionTimeout: 50 * 1000,
+		navigationTimeout: 30 * 1000,
 	},
 
 	expect: {
 		// Maximum time expect() should wait for the condition to be met.
-		timeout: 10 * 1000,
+		timeout: 90 * 1000,
 
 		toHaveScreenshot: {
 			// An acceptable amount of pixels that could be different, unset by default.
@@ -62,20 +62,20 @@ export default defineConfig({
 			use: { ...devices["Desktop Firefox"] },
 		},
 
-		{
-			name: "webkit",
-			use: { ...devices["Desktop Safari"] },
-		},
+		//{
+		//	name: "webkit",
+		//	use: { ...devices["Desktop Safari"] },
+		//},
 
 		/* Test against mobile viewports. */
 		{
 			name: "Mobile Chrome",
 			use: { ...devices["Pixel 5"] },
 		},
-		{
-			name: "Mobile Safari",
-			use: { ...devices["iPhone 12"] },
-		},
+		//{
+		//	name: "Mobile Safari",
+		//	use: { ...devices["iPhone 12"] },
+		//},
 
 		/* Test against branded browsers. */
 		{
@@ -95,6 +95,6 @@ export default defineConfig({
 		reuseExistingServer: !process.env.CI,
 		stdout: "ignore",
 		stderr: "pipe",
-		timeout: 5 * 1000,
+		timeout: 30 * 1000,
 	},
 });

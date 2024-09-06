@@ -19,7 +19,12 @@ export default async function AboutPage() {
 	const html = await marked.parse(md);
 	return (
 		<main className={styles.main} data-testid="page-body">
-			<h1 className={styles.title} data-testid="page-title">
+			<h1
+				className={styles.title}
+				data-testid="page-title"
+				role="heading"
+				aria-level={1}
+			>
 				About
 			</h1>
 			<article

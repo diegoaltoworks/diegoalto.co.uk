@@ -13,11 +13,11 @@ test.afterAll(async () => {
 	await page.close();
 });
 
-test.describe("about page navigation", () => {
-	test("menu navigate to about page", async () => {
+test.describe("projects page navigation", () => {
+	test("menu navigate to projects page", async () => {
 		await expectClick(page.getByTestId("open-menu-button"));
-		await expectClick(page.getByRole("link", { name: "About" }));
-		await expectText(page.getByTestId("page-title"), "About");
+		await expectClick(page.getByRole("link", { name: "Projects" }));
+		await expectText(page.getByTestId("page-title"), "Projects");
 	});
 
 	test("menu navigate back to homepage", async () => {

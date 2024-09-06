@@ -3,7 +3,7 @@ import styles from "./page.module.scss";
 export default function Home() {
 	return (
 		<main className={styles.main} data-testid="page-body">
-			<div role="heading" aria-level={1}>
+			<div role="heading" aria-level={1} data-testid="homepage-hello">
 				Olá!
 			</div>
 			<div role="subheading" aria-level={2}>

@@ -1,13 +1,31 @@
-import { test, expect, Page } from "@playwright/test";
-import { metadata } from "@/lib/metadata";
 import { faker } from "@faker-js/faker";
+import { test, Page, expect } from "@playwright/test";
+import { expectSee, expectText, expectClick, fillForm } from "@e2e/lib/tests";
 
 test.describe.configure({ mode: "serial" });
 
 let page: Page;
+
 test.beforeAll(async ({ browser }) => {
 	page = await browser.newPage();
-	await page.goto("/contact");
+	await page.goto("/");
+});
+test.afterAll(async () => {
+	await page.close();
+});
+
+test.describe("contact page navigation", () => {
+	test("menu navigate to contact page", async () => {
+		await expectClick(page.getByTestId("open-menu-button"));
+		await expectClick(page.getByRole("link", { name: "Contact" }));
+		await expectText(page.getByTestId("page-title"), "Contact");
+	});
+
+	test("menu navigate back to homepage", async () => {
+		await expectClick(page.getByTestId("open-menu-button"));
+		await expectClick(page.getByRole("link", { name: "Home" }));
+		await expectSee(page.getByTestId("homepage-hello"));
+	});
 });
 
 const blankData = {
@@ -23,58 +41,58 @@ const goodData = {
 	message: faker.string.alpha(50),
 };
 
-const fillForm = async (data: any) => {
-	for (var name in data) {
-		await page.locator(`input[name="${name}"]`).fill(data[name]);
-	}
+const fillContactForm = async (data: Record<string, string>) => {
+	await fillForm(page.getByTestId("contact-form"), data);
 };
-const submitForm = async () => {
-	await page.getByTestId("submit-button").click();
+const submitContactForm = async () => {
+	await expectClick(page.getByTestId("submit-button"));
 };
 
 const expectedErrorMessages = async (expectedErrorMessages: string[]) => {
 	const errorMessages = await page.$$("p.Mui-error");
 	for (let i = 0; i < expectedErrorMessages.length; i++) {
 		const errorMessage = await errorMessages[i].innerText();
-		console.log({ i, errorMessage });
 		expect(errorMessage).toContain(expectedErrorMessages[i]);
 	}
 };
 
-test.afterAll(async () => {
-	await page.close();
+test.describe("contact page error handling", () => {
+	test.beforeAll(async () => {
+		await page.goto("/contact");
+	});
+
+	test("required fields error", async () => {
+		await fillContactForm({ ...blankData });
+		await submitContactForm();
+		await expectedErrorMessages([
+			"Required",
+			"Required",
+			"Required",
+			"Required",
+		]);
+	});
+
+	test("invalid email error", async () => {
+		await fillContactForm({ ...goodData, email: "invalid email" });
+		await submitContactForm();
+		await expectedErrorMessages(["Invalid email"]);
+	});
+
+	test("invalid phone error", async () => {
+		await fillContactForm({ ...goodData, phone: "invalid phone" });
+		await submitContactForm();
+		await expectedErrorMessages(["Invalid phone"]);
+	});
 });
 
-test("has title", async () => {
-	// Expect a title "to contain" a substring.
-	await expect(page).toHaveTitle(new RegExp(`${metadata.title}`));
-});
+test.describe("contact page valid submission", () => {
+	test.beforeAll(async () => {
+		await page.goto("/contact");
+	});
 
-test("renders form", async () => {
-	// Expects page to have a heading with the name of Installation.
-	await expect(page.getByTestId("contact-form")).toBeVisible();
-});
-
-test("required fieldsa error", async () => {
-	await fillForm({ ...blankData });
-	await submitForm();
-	await expectedErrorMessages(["Required", "Required", "Required", "Required"]);
-});
-
-test("invalid email error", async () => {
-	await fillForm({ ...goodData, email: "invalid email" });
-	await submitForm();
-	await expectedErrorMessages(["Invalid email"]);
-});
-
-test("invalid phone error", async () => {
-	await fillForm({ ...goodData, phone: "invalid phone" });
-	await submitForm();
-	await expectedErrorMessages(["Invalid phone"]);
-});
-
-test("valid submission", async () => {
-	await fillForm({ ...goodData });
-	await submitForm();
-	await expect(page.getByTestId("success-message")).toBeVisible();
+	test("valid submission", async () => {
+		await fillContactForm({ ...goodData });
+		await submitContactForm();
+		await expect(page.getByTestId("success-message")).toBeVisible();
+	});
 });

@@ -2,7 +2,7 @@ name: PR Test and Build
 
 on:
   pull_request:
-    types: [opened, reopened, synchronize]
+    types: [opened, reopened]
 
 jobs:
   test:

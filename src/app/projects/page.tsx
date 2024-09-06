@@ -6,7 +6,12 @@ import { Projects } from "./Projects";
 export default function ProjectsPage() {
 	return (
 		<main className={styles.main} data-testid="page-body">
-			<h1 className={styles.title} data-testid="page-title">
+			<h1
+				className={styles.title}
+				data-testid="page-title"
+				role="heading"
+				aria-level={1}
+			>
 				Projects
 			</h1>
 			<Projects />
