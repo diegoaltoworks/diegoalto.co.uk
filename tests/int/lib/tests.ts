@@ -19,7 +19,9 @@ export const fillForm = async (
 ) => {
 	expect(locator).toBeVisible();
 	for (var name in data) {
-		const field = locator.querySelector(`input[name="${name}"]`);
+		const field = locator.querySelector(
+			`input[name="${name}"]`
+		) as HTMLInputElement;
 		if (!field) throw new Error(`Field with name ${name} not found`);
 		expect(field).toBeVisible();
 		field.value = data[name];
