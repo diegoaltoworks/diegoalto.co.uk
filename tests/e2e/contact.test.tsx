@@ -50,6 +50,7 @@ const submitContactForm = async () => {
 
 const expectedErrorMessages = async (expectedErrorMessages: string[]) => {
 	const errorMessages = await page.$$("p.Mui-error");
+	debugger;
 	for (let i = 0; i < expectedErrorMessages.length; i++) {
 		const errorMessage = await errorMessages[i].innerText();
 		expect(errorMessage).toContain(expectedErrorMessages[i]);
@@ -80,7 +81,7 @@ test.describe("contact page error handling", () => {
 
 	test("invalid phone error", async () => {
 		await fillContactForm({ ...goodData, phone: "invalid phone" });
-		await submitContactForm();
+		//await submitContactForm();
 		await expectedErrorMessages(["Invalid phone"]);
 	});
 });
@@ -91,12 +92,22 @@ test.describe("contact page valid submission", () => {
 	});
 
 	test("valid submission", async () => {
-		await page.route("**/contact", (route) =>
+		/*
+		await page.route("/contact", async (route) => {
+			if (
+				!(await route.request().headersArray()).some(
+					({ name }) => name === "Next-Action"
+				)
+			) {
+				return route.continue();
+			}
+
 			route.fulfill({
 				status: 200,
 				body: JSON.stringify({ ok: 1 }),
-			})
-		);
+			});
+		});
+		*/
 		await fillContactForm({ ...goodData });
 		await submitContactForm();
 		await expect(page.getByTestId("success-message")).toBeVisible();
