@@ -63,7 +63,7 @@ export const handler = async (data: any) => {
 		const response = await fetch(endpoint, payload);
 		const result = await response.json();
 		console.log("RESULT!", { result });
-		return { ok: 1, hello: "world" };
+		return { ok: 1 };
 	} catch (error) {
 		throw new ExternalError("Mail service error", error);
 	}

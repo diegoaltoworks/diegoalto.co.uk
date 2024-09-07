@@ -4,6 +4,20 @@ on:
   pull_request:
     types: [opened, reopened, synchronize]
 
+env:
+  EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
+  EMAIL_DOMAIN: ${{ secrets.EMAIL_DOMAIN }}
+  EMAIL_APIKEY: ${{ secrets.EMAIL_APIKEY }}
+  EMAIL_POSTMAN: ${{ secrets.EMAIL_POSTMAN }}
+  EMAIL_RECIPIENT: ${{ secrets.EMAIL_RECIPIENT }}
+  SITE_NAME: ${{ secrets.SITE_NAME }}
+  NEXT_PUBLIC_GITHUB_USERNAME: ${{ secrets.NEXT_PUBLIC_GITHUB_USERNAME }}
+  NEW_RELIC_PASSKEY: ${{ secrets.NEW_RELIC_PASSKEY }}
+  NEW_RELIC_APP_NAME: ${{ secrets.NEW_RELIC_APP_NAME }}
+  NEW_RELIC_LICENSE_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }}
+  NEXT_PUBLIC_NEW_RELIC_BROWSER_KEY: ${{ secrets.NEXT_PUBLIC_NEW_RELIC_BROWSER_KEY }}
+  NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.NEXT_PUBLIC_SENTRY_DSN }}
+
 jobs:
   test:
     runs-on: ubuntu-latest
