@@ -68,12 +68,12 @@ test.describe("contact page error handling", () => {
 	});
 });
 
-test.describe("contact page valid submission", () => {
-	test("valid submission", async () => {
+test.describe("contact page valid submission but fails on server", () => {
+	test("valid submission fails with 500", async () => {
 		await page.route("https://fwmail.fyneworks.io/send", async (route) => {
 			return route.fulfill({
-				status: 200,
-				body: JSON.stringify({ ok: 1 }),
+				status: 500,
+				body: JSON.stringify({ error: 1 }),
 				headers: {
 					"content-type": "application/json",
 				},

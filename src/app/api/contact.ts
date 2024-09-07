@@ -4,6 +4,11 @@ import { NextAPIHandlerErrorWrapper } from "@/lib/error.handlers";
 import { ConfigError, ExternalError, InputError } from "@/lib/errors";
 import { contactSchema } from "@/lib/types/contact";
 
+type ContactAPIResponse = {
+	ok: number;
+	[key: string]: any;
+};
+
 const {
 	EMAIL_SENDER,
 	EMAIL_DOMAIN,
@@ -58,10 +63,10 @@ export const handler = async (data: any) => {
 		const response = await fetch(endpoint, payload);
 		const result = await response.json();
 		console.log("RESULT!", { result });
-		return Response.json({ ok: 1 });
+		return { ok: 1, hello: "world" };
 	} catch (error) {
 		throw new ExternalError("Mail service error", error);
 	}
 };
 
-export const POST = NextAPIHandlerErrorWrapper(handler);
+export const POST = NextAPIHandlerErrorWrapper<ContactAPIResponse>(handler);

@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { test, Page, expect } from "@playwright/test";
-import { expectSee, expectText, expectClick, fillForm } from "@e2e/lib/tests";
+import { expectSee, expectClick } from "@e2e/lib/tests";
 
 test.describe.configure({ mode: "serial" });
 
