@@ -2,7 +2,7 @@ name: "PR Preview"
 
 on:
   workflow_run:
-    workflows: ["PR Test and Build"]
+    workflows: ["PR Test"]
 
 jobs:
   pr-test-failure:
