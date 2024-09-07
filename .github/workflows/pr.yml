@@ -23,6 +23,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check environment variables
+        uses: ./.github/actions/check-env-vars # Path to the custom action
+        with:
+          variables: "EMAIL_SENDER,EMAIL_DOMAIN,EMAIL_APIKEY,EMAIL_POSTMAN,EMAIL_RECIPIENT,SITE_NAME,NEXT_PUBLIC_GITHUB_USERNAME,NEW_RELIC_PASSKEY,NEW_RELIC_APP_NAME,NEW_RELIC_LICENSE_KEY,NEXT_PUBLIC_NEW_RELIC_BROWSER_KEY,NEXT_PUBLIC_SENTRY_DSN"
+
       - name: Checkout code
         uses: actions/checkout@v4
         with:
