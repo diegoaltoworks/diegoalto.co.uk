@@ -28,15 +28,15 @@ export default defineConfig({
 		baseURL: "http://127.0.0.1:3000",
 
 		/* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-		trace: "on-first-retry",
+		trace: "on",
 
-		actionTimeout: 50 * 1000,
-		navigationTimeout: 30 * 1000,
+		actionTimeout: 5 * 1000 * 3,
+		navigationTimeout: 3 * 1000 * 3,
 	},
 
 	expect: {
 		// Maximum time expect() should wait for the condition to be met.
-		timeout: 90 * 1000,
+		timeout: 9 * 1000 * 3,
 
 		toHaveScreenshot: {
 			// An acceptable amount of pixels that could be different, unset by default.
@@ -92,7 +92,7 @@ export default defineConfig({
 	webServer: {
 		command: "npm run dev",
 		url: "http://127.0.0.1:3000",
-		reuseExistingServer: false,
+		reuseExistingServer: true,
 		stdout: "ignore",
 		stderr: "pipe",
 		timeout: 30 * 1000,

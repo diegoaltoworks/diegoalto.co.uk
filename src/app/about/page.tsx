@@ -1,22 +1,8 @@
-import { marked } from "marked";
+import { Alert } from "@mui/material";
 import styles from "./page.module.scss";
+import { MarkdownToHTML } from "@/components/MarkdownToHTML";
 
-// Set options
-marked.use({
-	async: true,
-	pedantic: false,
-	gfm: true,
-});
-
-const MARKDOWN_URL =
-	"https://raw.githubusercontent.com/diegoaltoworks/diegoaltoworks/main/README.md";
-
-const getMarkdown = async () => {
-	return fetch(MARKDOWN_URL).then((res) => res.text());
-};
-export default async function AboutPage() {
-	const md = await getMarkdown();
-	const html = await marked.parse(md);
+export default function AboutPage() {
 	return (
 		<main className={styles.main} data-testid="page-body">
 			<h1
@@ -27,11 +13,15 @@ export default async function AboutPage() {
 			>
 				About
 			</h1>
-			<article
-				className={styles.article}
-				dangerouslySetInnerHTML={{ __html: html }}
-				data-testid="page-copy"
-			/>
+			<article className={styles.article} data-testid="page-copy">
+				{process.env.NEXT_PUBLIC_GITHUB_USERNAME ? (
+					<MarkdownToHTML
+						url={`https://raw.githubusercontent.com/${process.env.NEXT_PUBLIC_GITHUB_USERNAME}/${process.env.NEXT_PUBLIC_GITHUB_USERNAME}/main/README.md`}
+					/>
+				) : (
+					<Alert severity="error">Missing github username</Alert>
+				)}
+			</article>
 		</main>
 	);
 }

@@ -1,7 +1,6 @@
-import React from "react";
 import styles from "./page.module.scss";
-import { useQuery } from "@tanstack/react-query";
-import { Projects } from "./Projects";
+import { GithubProjectsList } from "@/components/GithubProjectsList";
+import { Alert } from "@mui/material";
 
 export default function ProjectsPage() {
 	return (
@@ -14,7 +13,13 @@ export default function ProjectsPage() {
 			>
 				Projects
 			</h1>
-			<Projects />
+			{process.env.NEXT_PUBLIC_GITHUB_USERNAME ? (
+				<GithubProjectsList
+					username={process.env.NEXT_PUBLIC_GITHUB_USERNAME}
+				/>
+			) : (
+				<Alert severity="error">Missing github username</Alert>
+			)}
 		</main>
 	);
 }

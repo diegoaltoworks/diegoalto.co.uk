@@ -8,12 +8,17 @@ export default defineConfig({
 
 	test: {
 		globals: true,
+
+		environment: "jsdom",
+
 		browser: {
+			// browser mode is experimental
+			// https://vitest.dev/guide/browser/#browser-mode
+			enabled: false,
 			provider: "playwright", // or 'webdriverio'
-			enabled: true,
 			name: "chromium", // browser name is required
 		},
-		//environment: "jsdom",
+
 		setupFiles: ["./tests/unit/setup.ts", "./tests/int/setup.ts"],
 		include: [
 			"./tests/unit/**/*.test.{ts,tsx}",

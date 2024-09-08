@@ -65,9 +65,12 @@ export const contact = NextActionErrorWrapper(async (data: any) => {
 
 	try {
 		const response = await fetch(endpoint, payload);
-		//todo: handle different error status from mail service
 		const result = await response.json();
-		console.log("RESULT!", { result });
+		//todo: handle different error status from mail service
+		if (result.error) {
+			const error = result.error || "Mail service failed";
+			throw new ExternalError(error, { result });
+		}
 		return { ok: 1 };
 	} catch (error) {
 		throw new ExternalError("Mail service error", error);

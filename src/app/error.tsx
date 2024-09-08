@@ -4,7 +4,7 @@ import * as Sentry from "@sentry/nextjs";
 import Error from "next/error";
 import { useEffect } from "react";
 
-export default function GlobalError({
+export default function AppError({
 	error,
 	reset,
 }: {
@@ -13,9 +13,9 @@ export default function GlobalError({
 }) {
 	useEffect(() => {
 		Sentry.captureException(error);
-		console.error(error);
 	}, [error]);
 
+	console.error("App Error", error);
 	return (
 		<div>
 			<h2>Something went wrong!</h2>

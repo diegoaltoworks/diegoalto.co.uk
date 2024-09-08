@@ -141,6 +141,8 @@ export const ContactForm = () => {
 									variant="outlined"
 									error={Boolean(error)}
 									helperText={error?.message}
+									multiline
+									rows={5}
 									{...field}
 								/>
 							)}
@@ -153,30 +155,31 @@ export const ContactForm = () => {
 								gap: 2,
 							}}
 						>
-							<Typography sx={{ color: "primary.main" }}>
-								{isSubmitting && isDirty && (
-									<Chip
-										clickable
-										icon={<HourglassBottomIcon />}
-										label={"Sending..."}
-										onClick={() => clearErrors("root")}
-										color="info"
-									/>
-								)}
-								{root?.serverError?.message && (
-									<Chip
-										clickable
-										icon={<WarningIcon />}
-										label={root.serverError.message}
-										onClick={() => clearErrors("root")}
-										color="error"
-									/>
-								)}
-							</Typography>
+							{isSubmitting && isDirty && (
+								<Chip
+									data-testid="server-working-message"
+									clickable
+									icon={<HourglassBottomIcon />}
+									label={"Sending..."}
+									onClick={() => clearErrors("root")}
+									color="info"
+								/>
+							)}
+							{!isSubmitting && root?.serverError?.message && (
+								<Chip
+									data-testid="server-error-message"
+									clickable
+									icon={<WarningIcon />}
+									label={root.serverError.message}
+									onClick={() => clearErrors("root")}
+									color="error"
+								/>
+							)}
 							<Button
 								disabled={isSubmitting && isDirty}
 								variant="contained"
 								type="submit"
+								role="submit"
 								data-testid="submit-button"
 							>
 								Submit
