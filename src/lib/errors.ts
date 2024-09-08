@@ -1,7 +1,7 @@
 export type ErrorJSON = {
 	statusCode: number;
 	type: string;
-	info: string;
+	info: object;
 	error: string;
 };
 export class BaseError extends Error {

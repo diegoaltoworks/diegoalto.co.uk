@@ -3,10 +3,12 @@
 import React from "react";
 import { contact } from "@/app/actions/contact";
 import { useForm, Controller } from "react-hook-form";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, Chip, TextField, Typography } from "@mui/material";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactSchema, IContact, KContact } from "@/lib/types/contact";
 import { AppError, ExternalError } from "@/lib/errors";
+import WarningIcon from "@mui/icons-material/Warning";
+import HourglassBottomIcon from "@mui/icons-material/HourglassBottom";
 
 const defaultValues = {
 	name: "",
@@ -22,7 +24,12 @@ export const ContactForm = () => {
 		handleSubmit,
 		reset,
 		setError,
-		formState: { isSubmitting, isDirty },
+		clearErrors,
+		formState: {
+			isSubmitting,
+			isDirty,
+			errors: { root },
+		},
 	} = useForm({
 		defaultValues,
 		resolver: zodResolver(contactSchema),
@@ -45,10 +52,11 @@ export const ContactForm = () => {
 			setError("root.serverError", {
 				message: error || "Error submitting form",
 			});
-			Object.keys(errors).forEach((key) => {
-				console.error("ContactForm Error:", key, errors[key]);
-				setError(key as KContact, { message: errors[key] });
-			});
+			if (errors)
+				Object.keys(errors).forEach((key) => {
+					console.error("ContactForm Error:", key, errors[key]);
+					setError(key as KContact, { message: errors[key] });
+				});
 		} catch (error: AppError | any) {
 			console.error("ContactForm Error:", error);
 			setError("root.serverError", {
@@ -137,9 +145,33 @@ export const ContactForm = () => {
 								/>
 							)}
 						/>
-						<Box sx={{ textAlign: "right" }}>
+						<Box
+							sx={{
+								textAlign: "right",
+								display: "flex",
+								justifyContent: "flex-end",
+								gap: 2,
+							}}
+						>
 							<Typography sx={{ color: "primary.main" }}>
-								{isSubmitting && isDirty && "Submitting..."}
+								{isSubmitting && isDirty && (
+									<Chip
+										clickable
+										icon={<HourglassBottomIcon />}
+										label={"Sending..."}
+										onClick={() => clearErrors("root")}
+										color="info"
+									/>
+								)}
+								{root?.serverError?.message && (
+									<Chip
+										clickable
+										icon={<WarningIcon />}
+										label={root.serverError.message}
+										onClick={() => clearErrors("root")}
+										color="error"
+									/>
+								)}
 							</Typography>
 							<Button
 								disabled={isSubmitting && isDirty}

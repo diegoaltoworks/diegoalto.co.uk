@@ -13,9 +13,18 @@ const {
 } = process.env;
 
 export const contact = NextActionErrorWrapper(async (data: any) => {
-	if (!EMAIL_SENDER) throw new ConfigError("Missing mail service SENDER");
-	if (!EMAIL_DOMAIN) throw new ConfigError("Missing mail service DOMAIN");
-	if (!EMAIL_APIKEY) throw new ConfigError("Missing mail service APIKEY");
+	if (!EMAIL_SENDER)
+		throw new ConfigError("Missing mail service SENDER", {
+			missing_env_vars: "EMAIL_SENDER",
+		});
+	if (!EMAIL_DOMAIN)
+		throw new ConfigError("Missing mail service DOMAIN", {
+			missing_env_vars: "EMAIL_DOMAIN",
+		});
+	if (!EMAIL_APIKEY)
+		throw new ConfigError("Missing mail service APIKEY", {
+			missing_env_vars: "EMAIL_APIKEY",
+		});
 
 	const validation = contactSchema.safeParse(data);
 	if (!validation.success) {

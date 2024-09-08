@@ -33,7 +33,7 @@ export const NextActionErrorWrapper = (handler: Function): Function => {
 			if (error?.isOperationalError) {
 				logger.error(error);
 			}
-			return { error: "oops" }; //error;
+			return error.toJSON();
 		}
 	};
 };

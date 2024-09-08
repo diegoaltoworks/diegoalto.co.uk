@@ -1,13 +1,14 @@
 /** @type {import('next').NextConfig} */
 const { withSentryConfig } = require("@sentry/nextjs");
+const { env } = require("./next.config.env.js");
 
 const nextConfig = {};
 const sentryConfig = {
 	// For all available options, see:
 	// https://github.com/getsentry/sentry-webpack-plugin#options
 
-	org: "dworks-org",
-	project: "dworks-website",
+	org: env.SENTRY_ORG,
+	project: env.SENTRY_PROJECT,
 
 	// Only print logs for uploading source maps in CI
 	silent: !process.env.CI,
