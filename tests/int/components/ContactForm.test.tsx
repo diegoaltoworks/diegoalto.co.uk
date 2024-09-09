@@ -101,7 +101,7 @@ describe("ContactForm component", () => {
 		} as ErrorData);
 	});
 
-	it.only("shows wait then success with good data", async () => {
+	it("shows wait then success with good data", async () => {
 		await fillForm(goodData);
 		await expectErrors(blankData as ErrorData);
 		await user.click(screen.getByRole("submit"));
