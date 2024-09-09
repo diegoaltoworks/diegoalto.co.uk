@@ -1,12 +1,13 @@
 import { z } from "zod";
 
-const isPhone = (s: string) => /^[+]?[0-9\(\)\-\s]+$/.test(s.trim());
-const isEmail = (s: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.trim());
+export const isPhone = (s: string) => /^[+]?[0-9\(\)\-\s]+$/.test(s.trim());
+export const isEmail = (s: string) =>
+	/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.trim());
 
-const cleanPhone = (s: string) => s.trim().replace(/[^0-9]+/g, "");
-const cleanEmail = (s: string) => s.trim().toLowerCase();
+export const cleanPhone = (s: string) => s.trim().replace(/[^0-9]+/g, "");
+export const cleanEmail = (s: string) => s.trim().toLowerCase();
 
-const cleanContact = (data: any) => ({
+export const cleanContact = (data: any) => ({
 	...data,
 	email: cleanEmail(data.email),
 	phone: cleanPhone(data.phone),

@@ -6,8 +6,7 @@ on:
       - main
 
 jobs:
-
-  deploy-to-vercel-prod:
+  deploy-production:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,4 +24,4 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod'
+          vercel-args: "--prod"

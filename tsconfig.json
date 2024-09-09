@@ -20,7 +20,10 @@
 			}
 		],
 		"paths": {
-			"@/*": ["./src/*"]
+			"@/*": ["./src/*"],
+			"@e2e/*": ["./tests/e2e/*"],
+			"@int/*": ["./tests/int/*"],
+			"@unit/*": ["./tests/unit/*"]
 		},
 		"types": ["@testing-library/jest-dom/vitest"]
 	},
