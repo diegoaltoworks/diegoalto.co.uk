@@ -5,7 +5,12 @@ import styles from "./page.module.scss";
 export default function ContactPage() {
 	return (
 		<main className={styles.main} data-testid="page-body">
-			<h1 className={styles.title} data-testid="page-title">
+			<h1
+				className={styles.title}
+				data-testid="page-title"
+				role="heading"
+				aria-level={1}
+			>
 				Contact
 			</h1>
 			<ContactForm />

@@ -1,15 +1,18 @@
+"use client";
 import * as React from "react";
 import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { SwipeableDrawer } from "@mui/material";
+import { IconButton, SwipeableDrawer } from "@mui/material";
 import { Menu } from "./Navigation/Menu";
 import { useBodyClass } from "@/hooks/useBodyClass";
 import { Actions } from "./Navigation/Actions";
+import { usePathname } from "next/navigation";
 
 export const Navigation: React.FC = () => {
+	const pathname = usePathname();
 	const [state, setState] = React.useState<{ open: boolean }>({ open: false });
 	useBodyClass(state.open ? ["navigation-is-open"] : []);
+
 	const toggleDrawer =
 		(open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
 			if (
@@ -23,6 +26,14 @@ export const Navigation: React.FC = () => {
 
 			setState({ ...state, open });
 		};
+	const closeDrawerIfCurrent = (event: React.SyntheticEvent) => {
+		if (
+			event.target instanceof HTMLElement &&
+			event.target.closest("a")?.getAttribute("href") === pathname
+		) {
+			toggleDrawer(false);
+		}
+	};
 
 	return (
 		<>
@@ -31,7 +42,10 @@ export const Navigation: React.FC = () => {
 					size="large"
 					edge="end"
 					color="inherit"
-					aria-label="open drawer"
+					aria-haspopup="true"
+					aria-controls="menu"
+					aria-expanded={state.open}
+					data-testid="open-menu-button"
 					sx={{ lf: 2 }}
 					onClick={toggleDrawer(true)}
 				>
@@ -42,8 +56,9 @@ export const Navigation: React.FC = () => {
 			<SwipeableDrawer
 				anchor={"right"}
 				open={state.open}
-				onClose={toggleDrawer(false)}
-				onOpen={toggleDrawer(true)}
+				onClose={() => toggleDrawer(false)}
+				onOpen={() => toggleDrawer(true)}
+				onClickCapture={closeDrawerIfCurrent}
 			>
 				<Box
 					sx={{

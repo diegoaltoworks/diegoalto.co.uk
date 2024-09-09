@@ -15,22 +15,22 @@ const menu = {
 		items: [
 			{
 				text: "Home",
-				link: "home",
+				link: "/",
 				icon: <HomeIcon />,
 			},
 			{
 				text: "About",
-				link: "about",
+				link: "/about",
 				icon: <AboutIcon />,
 			},
 			{
 				text: "Projects",
-				link: "projects",
+				link: "/projects",
 				icon: <ProjectsIcon />,
 			},
 			{
 				text: "Contact",
-				link: "contact",
+				link: "/contact",
 				icon: <ContactIcon />,
 			},
 		],

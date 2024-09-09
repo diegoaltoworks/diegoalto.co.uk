@@ -8,13 +8,26 @@ export default defineConfig({
 
 	test: {
 		globals: true,
+
 		environment: "jsdom",
-		setupFiles: ["./tests/integration/setup.ts"],
-		include: ["./tests/integration/**/*.test.{ts,tsx}"],
+
+		browser: {
+			// browser mode is experimental
+			// https://vitest.dev/guide/browser/#browser-mode
+			enabled: false,
+			provider: "playwright", // or 'webdriverio'
+			name: "chromium", // browser name is required
+		},
+
+		setupFiles: ["tests/unit/setup.ts", "tests/int/setup.ts"],
+		include: ["tests/unit/**/*.test.{ts,tsx}", "tests/int/**/*.test.{ts,tsx}"],
 	},
 	resolve: {
 		alias: {
 			"@": path.resolve(__dirname, "./src"),
+			"@e2e": path.resolve(__dirname, "./tests/e2e"),
+			"@int": path.resolve(__dirname, "./tests/int"),
+			"@unit": path.resolve(__dirname, "./tests/unit"),
 		},
 	},
 });

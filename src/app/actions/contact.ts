@@ -1,11 +1,7 @@
 "use server";
 
-import {
-	ConfigError,
-	ExternalError,
-	InputError,
-	NextActionErrorWrapper,
-} from "@/lib/errors";
+import { NextActionErrorWrapper } from "@/lib/error.handlers";
+import { ConfigError, ExternalError, InputError } from "@/lib/errors";
 import { contactSchema } from "@/lib/types/contact";
 
 const {
@@ -17,9 +13,18 @@ const {
 } = process.env;
 
 export const contact = NextActionErrorWrapper(async (data: any) => {
-	if (!EMAIL_SENDER) throw new ConfigError("Missing mail service SENDER");
-	if (!EMAIL_DOMAIN) throw new ConfigError("Missing mail service DOMAIN");
-	if (!EMAIL_APIKEY) throw new ConfigError("Missing mail service APIKEY");
+	if (!EMAIL_SENDER)
+		throw new ConfigError("Missing mail service SENDER", {
+			missing_env_vars: "EMAIL_SENDER",
+		});
+	if (!EMAIL_DOMAIN)
+		throw new ConfigError("Missing mail service DOMAIN", {
+			missing_env_vars: "EMAIL_DOMAIN",
+		});
+	if (!EMAIL_APIKEY)
+		throw new ConfigError("Missing mail service APIKEY", {
+			missing_env_vars: "EMAIL_APIKEY",
+		});
 
 	const validation = contactSchema.safeParse(data);
 	if (!validation.success) {
@@ -61,7 +66,11 @@ export const contact = NextActionErrorWrapper(async (data: any) => {
 	try {
 		const response = await fetch(endpoint, payload);
 		const result = await response.json();
-		console.log("RESULT!", { result });
+		//todo: handle different error status from mail service
+		if (result.error) {
+			const error = result.error || "Mail service failed";
+			throw new ExternalError(error, { result });
+		}
 		return { ok: 1 };
 	} catch (error) {
 		throw new ExternalError("Mail service error", error);
