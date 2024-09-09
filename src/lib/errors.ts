@@ -72,16 +72,16 @@ export class UserError extends BaseError {
 }
 export class InputError extends UserError {
 	constructor(message: string, info?: any) {
-		super("InvalidInput", message, info, 401);
+		super("InputError", message, info, 401);
 	}
 }
 export class AuthError extends UserError {
 	constructor(message: string, info?: any) {
-		super("NotAuthorized", message, info, 403);
+		super("AuthError", message, info, 403);
 	}
 }
 export class NotFoundError extends UserError {
 	constructor(message: string, info?: any) {
-		super("NotFound", message, info, 404);
+		super("NotFoundError", message, info, 404);
 	}
 }

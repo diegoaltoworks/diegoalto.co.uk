@@ -1,7 +1,6 @@
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import { logger } from "./logger";
-import { NextResponse } from "next/server";
-import { BaseError, ErrorJSON } from "./errors";
+import { BaseError } from "./errors";
 
 type ApiHandler<T> = (req: NextApiRequest) => Promise<T>;
 

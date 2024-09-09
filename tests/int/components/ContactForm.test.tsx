@@ -30,7 +30,9 @@ const blankData: FormData = {
 const goodData: FormData = {
 	name: faker.person.fullName(),
 	email: faker.internet.email(),
-	phone: faker.phone.imei(),
+	phone: faker.phone.number({
+		style: Math.random() < 0.5 ? "national" : "international",
+	}),
 	message: faker.string.alpha(50),
 };
 const badData: FormData = {
@@ -101,7 +103,11 @@ describe("ContactForm component", () => {
 		} as ErrorData);
 	});
 
-	it("shows wait then success with good data", async () => {
+	it("sends email successfully if given good data", async () => {
+		if (!process.env.EMAIL_SENDER) {
+			console.warn("actual email sending test skipped!");
+			return;
+		}
 		await fillForm(goodData);
 		await expectErrors(blankData as ErrorData);
 		await user.click(screen.getByRole("submit"));

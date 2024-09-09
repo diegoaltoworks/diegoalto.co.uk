@@ -48,7 +48,9 @@ const blankData = {
 const goodData = {
 	name: faker.person.fullName(),
 	email: faker.internet.email(),
-	phone: faker.phone.imei(),
+	phone: faker.phone.number({
+		style: Math.random() < 0.5 ? "national" : "international",
+	}),
 	message: faker.string.alpha(50),
 };
 

@@ -1,6 +1,6 @@
 /// <reference types="vitest" />
-import { defineConfig } from "vite";
 import { loadEnv } from "vite";
+import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
@@ -11,8 +11,8 @@ export default defineConfig({
 		globals: true,
 
 		environment: "jsdom",
-
 		env: loadEnv("", process.cwd(), ""),
+		silent: false,
 
 		browser: {
 			// browser mode is experimental
@@ -22,7 +22,7 @@ export default defineConfig({
 			name: "chromium", // browser name is required
 		},
 
-		setupFiles: ["dotenv/config", "tests/unit/setup.ts", "tests/int/setup.ts"],
+		setupFiles: ["tests/unit/setup.ts", "tests/int/setup.ts"],
 		include: ["tests/unit/**/*.test.{ts,tsx}", "tests/int/**/*.test.{ts,tsx}"],
 	},
 	resolve: {
