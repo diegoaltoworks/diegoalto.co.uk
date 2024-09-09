@@ -80,6 +80,7 @@ export const ContactForm = () => {
 						{`I'll get back to you shortly.`}
 					</Typography>
 					<Button
+						data-testid="send-another-message"
 						variant="contained"
 						onClick={() => {
 							reset();

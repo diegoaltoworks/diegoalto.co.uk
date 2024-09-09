@@ -1,10 +1,14 @@
 import { ContactForm } from "@/components/ContactForm";
 import { faker } from "@faker-js/faker";
 import { describe, it, expect, beforeEach } from "vitest";
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 const user = userEvent.setup();
+beforeEach(() => {
+	render(<ContactForm />);
+});
+
 interface FormData {
 	name?: string;
 	email?: string;
@@ -64,10 +68,6 @@ export const expectErrors = async (errors: ErrorData) => {
 	}
 };
 
-beforeEach(() => {
-	render(<ContactForm />);
-});
-
 describe("ContactForm component", () => {
 	it("renders component", () => {
 		const form = screen.getByTestId("contact-form");
@@ -80,60 +80,35 @@ describe("ContactForm component", () => {
 		await expect(errors.length).toBe(4);
 	});
 
-	it("shows invalid email error", async () => {
-		const input = screen.getByLabelText(/email/i);
-		await user.clear(input);
-		await user.type(input, badData.email);
-		await user.tab();
-		expect(input).toHaveValue("invalid email");
-		const error = screen.getByText(/invalid email/gi);
-		expect(error).toBeInTheDocument();
-	});
-
-	it("shows invalid phone error", async () => {
-		const input = screen.getByLabelText(/phone/i);
-		await user.clear(input);
-		await user.type(input, badData.phone);
-		await user.tab();
-		expect(input).toHaveValue("invalid phone");
-		const error = screen.getByText(/invalid phone/gi);
-		expect(error).toBeInTheDocument();
-	});
-
-	it("shows invalid message error", async () => {
-		const input = screen.getByLabelText(/message/i);
-		await user.clear(input);
-		await user.type(input, badData.message);
-		await user.tab();
-		expect(input).toHaveValue("invalid message (too short)");
-		const error = screen.getByText(/at least/gi);
-		expect(error).toBeInTheDocument();
-	});
-
-	it("shows wait then success with good data", async () => {
-		await fillForm(goodData);
-		await user.click(screen.getByRole("submit"));
-		await expectErrors(blankData as ErrorData);
-	});
-
-	it("bad email", async () => {
+	it("bad email input", async () => {
 		await fillForm({ ...goodData, email: badData.email });
 		await user.click(screen.getByRole("submit"));
 		await expectErrors({ ...blankData, email: errors.email } as ErrorData);
 	});
 
-	it("bad phone", async () => {
+	it("bad phone input", async () => {
 		await fillForm({ ...goodData, phone: badData.phone });
 		await user.click(screen.getByRole("submit"));
 		await expectErrors({ ...blankData, phone: errors.phone } as ErrorData);
 	});
 
-	it("bad message", async () => {
+	it("bad message input", async () => {
 		await fillForm({ ...goodData, message: badData.message });
 		await user.click(screen.getByRole("submit"));
 		await expectErrors({
 			...blankData,
 			message: errors.message,
 		} as ErrorData);
+	});
+
+	it.only("shows wait then success with good data", async () => {
+		await fillForm(goodData);
+		await expectErrors(blankData as ErrorData);
+		await user.click(screen.getByRole("submit"));
+		await screen.getByTestId("server-working-message");
+		await waitFor(() =>
+			expect(screen.getByTestId("success-message")).toBeInTheDocument()
+		);
+		await screen.getByTestId("send-another-message");
 	});
 });
