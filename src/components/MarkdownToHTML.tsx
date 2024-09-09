@@ -1,4 +1,5 @@
 import { marked } from "marked";
+import { Suspense } from "react";
 
 // Set options
 marked.use({
@@ -18,12 +19,21 @@ const getMarkdownHTML = async (url: MarkdownToHTMLUrl) => {
 	const html = await marked.parse(md);
 	return html;
 };
-export const MarkdownToHTML = async ({ url }: MarkdownToHTMLProps) => {
+
+const MarkdownToHTMLBody: React.FC<MarkdownToHTMLProps> = async ({ url }) => {
 	const html = await getMarkdownHTML(url);
 	return (
 		<div
 			dangerouslySetInnerHTML={{ __html: html }}
 			data-testid="markdown-html"
 		/>
+	);
+};
+
+export const MarkdownToHTML: React.FC<MarkdownToHTMLProps> = ({ url }) => {
+	return (
+		<Suspense fallback={<div>Loading...</div>}>
+			<MarkdownToHTMLBody url={url} />
+		</Suspense>
 	);
 };

@@ -40,19 +40,6 @@ const queryClient = new QueryClient({
 	},
 });
 
-export const GithubProjectsList: React.FC<GithugProjectsProps> = ({
-	username,
-}) => {
-	return (
-		// Provide the client to your App
-		<QueryClientProvider client={queryClient}>
-			<Suspense fallback={<div>Loading...</div>}>
-				<ProjectsList username={username} />
-			</Suspense>
-		</QueryClientProvider>
-	);
-};
-
 const ProjectsList: React.FC<GithugProjectsProps> = ({ username }) => {
 	const getProjects = async () => {
 		return fetchProjects({ username });
@@ -130,5 +117,18 @@ const ProjectCard: React.FC<GithugProjectCardProps> = ({ project }) => {
 				/>
 			</CardActions>
 		</Card>
+	);
+};
+
+export const GithubProjectsList: React.FC<GithugProjectsProps> = ({
+	username,
+}) => {
+	return (
+		// Provide the client to your App
+		<QueryClientProvider client={queryClient}>
+			<Suspense fallback={<div>Loading...</div>}>
+				<ProjectsList username={username} />
+			</Suspense>
+		</QueryClientProvider>
 	);
 };
