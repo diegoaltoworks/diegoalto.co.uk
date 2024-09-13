@@ -19,6 +19,29 @@ const actions = {
 };
 
 export const Actions: React.FC = () => {
+	const [value, setValue] = React.useState<string | undefined>(undefined);
+	const onChange = (event: React.SyntheticEvent, value: string) => {
+		switch (value) {
+			case "login":
+				console.log("login");
+				break;
+			case "logout":
+				console.log("logout");
+				break;
+			case "chat":
+				console.log("chat");
+				break;
+			case "telegram":
+				console.log("telegram");
+				break;
+			case "bot":
+				console.log("bot");
+				break;
+			default:
+				console.error("Unknown action", value);
+				break;
+		}
+	};
 	return (
 		<BottomNavigation
 			showLabels
@@ -30,8 +53,8 @@ export const Actions: React.FC = () => {
 				justifyContent: "center",
 				display: "flex",
 			}}
-			//value={pathname}
-			//onChange={onChange}
+			value={value}
+			onChange={onChange}
 		>
 			{actions.main.items.map(({ text, link, icon }, index) => (
 				<BottomNavigationAction
