@@ -17,6 +17,7 @@
     "reset": "rm -rf node_modules package-json.lock && npm i"
   },
   "dependencies": {
+    "@clerk/nextjs": "^5.5.2",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@hookform/resolvers": "^3.9.0",

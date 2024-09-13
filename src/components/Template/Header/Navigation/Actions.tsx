@@ -3,30 +3,36 @@ import React from "react";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 
 import icons from "@/components/Template/Icons";
+import { useAuth, useSignIn } from "@clerk/clerk-react";
+import { useRouter } from "next/navigation";
+
 const { LoginIcon, LogoutIcon, ChatIcon, TelegramIcon, BotIcon } = icons;
 
-const actions = {
-	main: {
-		items: [
-			{ text: "Bot", link: "bot", icon: <BotIcon /> },
-			{ text: "Chat", link: "chat", icon: <ChatIcon /> },
-			//TODO: Implement these
-			//{ text: "Telegram", link: "telegram", icon: <TelegramIcon /> },
-			//{ text: "Logout", link: "logout", icon: <LogoutIcon /> },
-			{ text: "Login", link: "login", icon: <LoginIcon /> },
-		],
-	},
-};
-
 export const Actions: React.FC = () => {
-	const [value, setValue] = React.useState<string | undefined>(undefined);
+	const { isSignedIn, signOut } = useAuth();
+	const router = useRouter();
+
+	const actions = {
+		main: {
+			items: [
+				{ text: "Bot", link: "bot", icon: <BotIcon /> },
+				{ text: "Chat", link: "chat", icon: <ChatIcon /> },
+				isSignedIn
+					? { text: "Logout", link: "logout", icon: <LogoutIcon /> }
+					: { text: "Login", link: "login", icon: <LoginIcon /> },
+				//TODO: Implement these
+				//{ text: "Telegram", link: "telegram", icon: <TelegramIcon /> },
+			],
+		},
+	};
+
 	const onChange = (event: React.SyntheticEvent, value: string) => {
 		switch (value) {
 			case "login":
-				console.log("login");
+				(window as any).location = "https://accounts.diegoalto.works/sign-in";
 				break;
 			case "logout":
-				console.log("logout");
+				signOut();
 				break;
 			case "chat":
 				console.log("chat");
@@ -53,7 +59,6 @@ export const Actions: React.FC = () => {
 				justifyContent: "center",
 				display: "flex",
 			}}
-			value={value}
 			onChange={onChange}
 		>
 			{actions.main.items.map(({ text, link, icon }, index) => (
