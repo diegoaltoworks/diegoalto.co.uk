@@ -57,8 +57,8 @@ export const Search: React.FC = () => {
 				<StyledInputBase
 					placeholder="Search..."
 					inputProps={{ "aria-label": "search" }}
-					onFocus={(e) => {
-						toggleCommandMenu({ query: "" });
+					onFocus={() => {
+						toggleCommandMenu({ open: true, search: "" });
 					}}
 				/>
 			</SearchWrapper>
