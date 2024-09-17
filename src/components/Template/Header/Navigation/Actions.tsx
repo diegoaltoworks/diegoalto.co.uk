@@ -3,7 +3,7 @@ import React from "react";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 
 import icons from "@/components/Template/Icons";
-import { useAuth, useSignIn } from "@clerk/clerk-react";
+import { useAuth } from "@clerk/clerk-react";
 import { useRouter } from "next/navigation";
 
 const { LoginIcon, LogoutIcon, ChatIcon, TelegramIcon, BotIcon } = icons;
@@ -29,7 +29,7 @@ export const Actions: React.FC = () => {
 	const onChange = (event: React.SyntheticEvent, value: string) => {
 		switch (value) {
 			case "login":
-				(window as any).location = "https://accounts.diegoalto.works/sign-in";
+				router.push("/login");
 				break;
 			case "logout":
 				signOut();
