@@ -5,7 +5,7 @@ import { Navigation } from "./Footer/Navigation";
 
 export const Footer: React.FC = () => {
 	return (
-		<footer style={{ width: "100%", borderTop: "#ccc solid 1px" }}>
+		<footer style={{ width: "100%" }}>
 			<Copyright />
 			<Navigation />
 		</footer>
