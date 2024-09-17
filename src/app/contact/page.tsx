@@ -1,6 +1,8 @@
 import React from "react";
 import { ContactForm } from "@/components/ContactForm";
 import styles from "./page.module.scss";
+import Link from "next/link";
+import { Typography } from "@mui/material";
 
 export default function ContactPage() {
 	return (
@@ -14,6 +16,11 @@ export default function ContactPage() {
 				Contact
 			</h1>
 			<ContactForm />
+			<Typography>
+				<Link data-testid="privacy-link" href="/privacy">
+					Privacy policy
+				</Link>
+			</Typography>
 		</main>
 	);
 }
