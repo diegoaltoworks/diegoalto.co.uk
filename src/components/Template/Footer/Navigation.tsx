@@ -4,7 +4,7 @@ import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { useRouter, usePathname } from "next/navigation";
 
 import icons from "@/components/Template/Icons";
-const { HomeIcon, ContactIcon, ProjectsIcon, AboutIcon } = icons;
+const { ContactIcon, ProjectsIcon, AboutIcon } = icons;
 
 export const Navigation: React.FC = () => {
 	const pathname = usePathname();
