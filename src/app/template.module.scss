@@ -10,6 +10,10 @@ $buffer: 20px;
 
 .wrap {
 	display: flex;
+	body.cmdk-is-open & {
+		opacity: 0.3;
+		transition: opacity 0.5s linear;
+	}
 }
 .main {
 	display: flex;

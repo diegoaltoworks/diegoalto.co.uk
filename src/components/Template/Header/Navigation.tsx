@@ -56,8 +56,8 @@ export const Navigation: React.FC = () => {
 			<SwipeableDrawer
 				anchor={"right"}
 				open={state.open}
-				onClose={() => toggleDrawer(false)}
-				onOpen={() => toggleDrawer(true)}
+				onClose={toggleDrawer(false)}
+				onOpen={toggleDrawer(true)}
 				onClickCapture={closeDrawerIfCurrent}
 			>
 				<Box

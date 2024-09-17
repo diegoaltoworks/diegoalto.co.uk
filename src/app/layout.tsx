@@ -2,6 +2,7 @@ import React from "react";
 import Metadata from "@/lib/metadata";
 import { Inter } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Theme } from "@/components/Template/Theme";
 const inter = Inter({ subsets: ["latin"] });
 import "./layout.scss";
@@ -18,10 +19,12 @@ const RootLayout = ({ children }: React.PropsWithChildren) => (
 			></link>
 		</head>
 		<body className={inter.className}>
-			<AppRouterCacheProvider>
-				<CssBaseline />
-				<Theme>{children}</Theme>
-			</AppRouterCacheProvider>
+			<ClerkProvider>
+				<AppRouterCacheProvider>
+					<CssBaseline />
+					<Theme>{children}</Theme>
+				</AppRouterCacheProvider>
+			</ClerkProvider>
 		</body>
 	</html>
 );
