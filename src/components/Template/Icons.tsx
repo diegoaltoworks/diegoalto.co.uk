@@ -8,6 +8,7 @@ import ChatIcon from "@mui/icons-material/Chat";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import SendIcon from "@mui/icons-material/Send";
 import BotIcon from "@mui/icons-material/SmartToy";
+import PrivacyIcon from "@mui/icons-material/PrivacyTip";
 
 const icons = {
 	HomeIcon,
@@ -20,6 +21,7 @@ const icons = {
 	TelegramIcon,
 	SendIcon,
 	BotIcon,
+	PrivacyIcon,
 };
 
 export default icons;

@@ -17,8 +17,9 @@ export const groups = {
 	},
 	Website: {
 		Home: { text: "Home", link: "/" },
-		About: { text: "About", link: "/about" },
+		About: { text: "About Me", link: "/about" },
 		Projects: { text: "Projects", link: "/projects" },
-		Contact: { text: "Contact", link: "/contact" },
+		Contact: { text: "Contact Me", link: "/contact" },
+		Privacy: { text: "Privacy Policy", link: "/privacy" },
 	},
 };

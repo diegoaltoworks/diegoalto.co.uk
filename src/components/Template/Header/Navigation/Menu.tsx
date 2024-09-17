@@ -1,6 +1,6 @@
 import * as React from "react";
 import icons from "@/components/Template/Icons";
-const { HomeIcon, ContactIcon, ProjectsIcon, AboutIcon } = icons;
+const { HomeIcon, ContactIcon, ProjectsIcon, AboutIcon, PrivacyIcon } = icons;
 import {
 	List,
 	ListItem,
@@ -32,6 +32,11 @@ const menu = {
 				text: "Contact",
 				link: "/contact",
 				icon: <ContactIcon />,
+			},
+			{
+				text: "Privacy",
+				link: "/privacy",
+				icon: <PrivacyIcon />,
 			},
 		],
 	},
