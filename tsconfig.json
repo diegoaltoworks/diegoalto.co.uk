@@ -25,8 +25,7 @@
 			"@int/*": ["./tests/int/*"],
 			"@unit/*": ["./tests/unit/*"]
 		},
-		"typeRoots": ["./node_modules/@types", "./src/types"],
-		"types": ["@testing-library/jest-dom/vitest", "./src/*.d.ts"]
+		"typeRoots": ["./node_modules/@types", "./src/types"]
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
 	"exclude": ["node_modules"]
