@@ -2,7 +2,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import MenuIcon from "@mui/icons-material/Menu";
-import { IconButton, SwipeableDrawer } from "@mui/material";
+import { IconButton, Drawer } from "@mui/material";
 import { Menu } from "./Navigation/Menu";
 import { useBodyClass } from "@/hooks/useBodyClass";
 import { Actions } from "./Navigation/Actions";
@@ -53,11 +53,11 @@ export const Navigation: React.FC = () => {
 				</IconButton>
 			</Box>
 
-			<SwipeableDrawer
+			<Drawer
 				anchor={"right"}
 				open={state.open}
 				onClose={toggleDrawer(false)}
-				onOpen={toggleDrawer(true)}
+				//onOpen={toggleDrawer(true)}
 				onClickCapture={closeDrawerIfCurrent}
 			>
 				<Box
@@ -71,7 +71,7 @@ export const Navigation: React.FC = () => {
 					<Menu />
 					<Actions />
 				</Box>
-			</SwipeableDrawer>
+			</Drawer>
 		</>
 	);
 };

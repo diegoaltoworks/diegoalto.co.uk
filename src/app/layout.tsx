@@ -10,7 +10,14 @@ import { CssBaseline } from "@mui/material";
 
 export const metadata = Metadata;
 
-const RootLayout = ({ children }: React.PropsWithChildren) => (
+type RoootLayoutProps = {
+	header: React.ReactNode;
+	footer: React.ReactNode;
+	children: React.ReactNode;
+	auth: React.ReactNode;
+};
+
+const RootLayout = ({ children, header, footer, auth }: RoootLayoutProps) => (
 	<html lang="en">
 		<head>
 			<link
@@ -22,7 +29,12 @@ const RootLayout = ({ children }: React.PropsWithChildren) => (
 			<ClerkProvider>
 				<AppRouterCacheProvider>
 					<CssBaseline />
-					<Theme>{children}</Theme>
+					<Theme>
+						{children}
+						{header}
+						{footer}
+						{auth}
+					</Theme>
 				</AppRouterCacheProvider>
 			</ClerkProvider>
 		</body>

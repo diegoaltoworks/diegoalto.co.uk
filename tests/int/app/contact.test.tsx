@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll } from "vitest";
 import { render, screen } from "@testing-library/react";
 
-import Page from "@/app/contact/page";
+import Page from "@/app/(content)/contact/page";
 
 beforeAll(() => {
 	render(<Page />);

@@ -9,8 +9,9 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import SendIcon from "@mui/icons-material/Send";
 import BotIcon from "@mui/icons-material/SmartToy";
 import PrivacyIcon from "@mui/icons-material/PrivacyTip";
+import WhatsappIcon from "@mui/icons-material/WhatsApp";
 
-const icons = {
+const Icons = {
 	HomeIcon,
 	ContactIcon,
 	ProjectsIcon,
@@ -19,9 +20,10 @@ const icons = {
 	LogoutIcon,
 	ChatIcon,
 	TelegramIcon,
+	WhatsappIcon,
 	SendIcon,
 	BotIcon,
 	PrivacyIcon,
 };
 
-export default icons;
+export default Icons;

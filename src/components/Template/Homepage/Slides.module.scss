@@ -1,0 +1,26 @@
+.slide {
+	justify-content: space-around;
+	align-items: center;
+
+	&[data-testid="page-slide1"] {
+		color: darkblue;
+		a {
+			color: darkblue;
+		}
+		font-weight: bold;
+	}
+	&[data-testid="page-slide2"] {
+		color: darkgreen;
+		a {
+			color: darkgreen;
+		}
+		font-weight: bold;
+	}
+	&[data-testid="page-slide3"] {
+		color: darkred;
+		a {
+			color: darkred;
+		}
+		font-weight: bold;
+	}
+}

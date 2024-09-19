@@ -3,8 +3,8 @@ import React from "react";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { useRouter, usePathname } from "next/navigation";
 
-import icons from "@/components/Template/Icons";
-const { ContactIcon, ProjectsIcon, AboutIcon } = icons;
+import Icons from "@/components/Template/Icons";
+const { ContactIcon, ProjectsIcon, AboutIcon } = Icons;
 
 export const Navigation: React.FC = () => {
 	const pathname = usePathname();
