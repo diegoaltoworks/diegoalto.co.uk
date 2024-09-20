@@ -22,7 +22,7 @@ export default defineConfig({
 			name: "chromium", // browser name is required
 		},
 
-		setupFiles: ["tests/unit/setup.ts", "tests/int/setup.ts"],
+		setupFiles: ["tests/unit/vitest.setup.ts", "tests/int/vitest.setup.ts"],
 		include: ["tests/unit/**/*.test.{ts,tsx}", "tests/int/**/*.test.{ts,tsx}"],
 	},
 	resolve: {

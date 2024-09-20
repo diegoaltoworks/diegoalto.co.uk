@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { Box, Button, Link } from "@mui/material";
 import "./Command.scss";
 import { useBodyClass } from "@/hooks/useBodyClass";
-import icons from "@/components/Template/Icons";
+import Icons from "@/components/Template/Icons";
 import { groups } from "@/components/Template/Header/Command.links";
 import { useRouter } from "next/navigation";
-const { HomeIcon, ContactIcon, ProjectsIcon, AboutIcon } = icons;
+const { HomeIcon, ContactIcon, ProjectsIcon, AboutIcon } = Icons;
 
 export const toggleCommandMenu = (opts: CommandMenuOpts) => {
 	const event = new CustomEvent("cmdk", {

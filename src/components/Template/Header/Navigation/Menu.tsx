@@ -1,6 +1,6 @@
 import * as React from "react";
-import icons from "@/components/Template/Icons";
-const { HomeIcon, ContactIcon, ProjectsIcon, AboutIcon, PrivacyIcon } = icons;
+import Icons from "@/components/Template/Icons";
+const { HomeIcon, ContactIcon, ProjectsIcon, AboutIcon, PrivacyIcon } = Icons;
 import {
 	List,
 	ListItem,

@@ -2,11 +2,11 @@
 import React from "react";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 
-import icons from "@/components/Template/Icons";
+import Icons from "@/components/Template/Icons";
 import { useAuth } from "@clerk/clerk-react";
 import { useRouter } from "next/navigation";
 
-const { LoginIcon, LogoutIcon, ChatIcon, TelegramIcon, BotIcon } = icons;
+const { LoginIcon, LogoutIcon, ChatIcon, TelegramIcon, BotIcon } = Icons;
 
 export const Actions: React.FC = () => {
 	const { isSignedIn, signOut } = useAuth();
@@ -67,6 +67,7 @@ export const Actions: React.FC = () => {
 					value={link}
 					label={text}
 					icon={icon}
+					data-testid={`action-${link}`}
 				/>
 			))}
 		</BottomNavigation>

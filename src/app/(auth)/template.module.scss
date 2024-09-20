@@ -1,6 +1,6 @@
-$header-height: 60px;
-$footer-height: 60px;
-$buffer: 20px;
+$header-height: 5rem;
+$footer-height: 5rem;
+$buffer: 0.5rem;
 
 @mixin dont-print() {
 	@media print {

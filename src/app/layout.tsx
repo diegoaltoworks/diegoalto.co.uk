@@ -4,13 +4,24 @@ import { Inter } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Theme } from "@/components/Template/Theme";
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+	subsets: ["latin"],
+	display: "swap",
+	adjustFontFallback: false,
+});
 import "./layout.scss";
 import { CssBaseline } from "@mui/material";
 
 export const metadata = Metadata;
 
-const RootLayout = ({ children }: React.PropsWithChildren) => (
+type RoootLayoutProps = {
+	header: React.ReactNode;
+	footer: React.ReactNode;
+	children: React.ReactNode;
+	auth: React.ReactNode;
+};
+
+const RootLayout = ({ children, header, footer, auth }: RoootLayoutProps) => (
 	<html lang="en">
 		<head>
 			<link
@@ -22,7 +33,12 @@ const RootLayout = ({ children }: React.PropsWithChildren) => (
 			<ClerkProvider>
 				<AppRouterCacheProvider>
 					<CssBaseline />
-					<Theme>{children}</Theme>
+					<Theme>
+						{children}
+						{header}
+						{footer}
+						{auth}
+					</Theme>
 				</AppRouterCacheProvider>
 			</ClerkProvider>
 		</body>

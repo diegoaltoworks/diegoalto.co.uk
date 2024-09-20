@@ -23,6 +23,6 @@ test.describe("projects page navigation", () => {
 	test("menu navigate back to homepage", async () => {
 		await expectClick(page.getByTestId("open-menu-button"));
 		await expectClick(page.getByRole("link", { name: "Home" }));
-		await expectSee(page.getByTestId("homepage-hello"));
+		await expectSee(page.getByTestId("homepage-slides"));
 	});
 });

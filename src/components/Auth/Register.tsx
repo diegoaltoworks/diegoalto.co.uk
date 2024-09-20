@@ -1,6 +1,7 @@
-import { SignIn } from "@clerk/nextjs";
+"use client";
+import { SignUp } from "@clerk/nextjs";
 
-export default async function Page({ params }: { params: any }) {
+export const Register = () => {
 	return (
 		<div
 			style={{
@@ -10,7 +11,7 @@ export default async function Page({ params }: { params: any }) {
 				//height: '100vh',
 			}}
 		>
-			<SignIn
+			<SignUp
 				appearance={{
 					elements: {
 						formButtonPrimary: {
@@ -28,4 +29,4 @@ export default async function Page({ params }: { params: any }) {
 			/>
 		</div>
 	);
-}
+};
