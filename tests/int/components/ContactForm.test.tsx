@@ -103,18 +103,18 @@ describe("ContactForm component", () => {
 		} as ErrorData);
 	});
 
-	it("sends email successfully if given good data", async () => {
-		if (!process.env.EMAIL_SENDER) {
-			console.warn("actual email sending test skipped!");
-			return;
+	it.skipIf(!process.env.EMAIL_SENDER)(
+		"sends email successfully if given good data",
+		async () => {
+			await fillForm(goodData);
+			await expectErrors(blankData as ErrorData);
+			await user.click(screen.getByRole("submit"));
+			await screen.getByTestId("server-working-message");
+			await expectErrors({ ...blankData } as ErrorData);
+			await waitFor(() =>
+				expect(screen.getByTestId("success-message")).toBeInTheDocument()
+			);
+			await screen.getByTestId("send-another-message");
 		}
-		await fillForm(goodData);
-		await expectErrors(blankData as ErrorData);
-		await user.click(screen.getByRole("submit"));
-		await screen.getByTestId("server-working-message");
-		await waitFor(() =>
-			expect(screen.getByTestId("success-message")).toBeInTheDocument()
-		);
-		await screen.getByTestId("send-another-message");
-	});
+	);
 });
