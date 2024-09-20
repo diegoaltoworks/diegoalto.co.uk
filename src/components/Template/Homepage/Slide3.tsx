@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "./Slides.module.scss";
 import Icons from "@/components/Template/Icons";
+import { Button } from "@mui/material";
 
 export default function Slide3() {
 	return (
@@ -18,11 +19,15 @@ export default function Slide3() {
 			<div role="subheading" aria-level={3}>
 				(also on{" "}
 				<Link href="https://t.me/DiegoAlto">
-					<Icons.TelegramIcon /> Telegram
+					<Button>
+						<Icons.TelegramIcon /> Telegram
+					</Button>
 				</Link>
-				or
+				or{" "}
 				<Link href="https://wa.me/447467053623">
-					<Icons.WhatsappIcon /> Whatsapp
+					<Button>
+						<Icons.WhatsappIcon /> Whatsapp
+					</Button>
 				</Link>
 				)
 			</div>

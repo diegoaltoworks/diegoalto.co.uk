@@ -1,57 +1,64 @@
 "use client";
-import React, { useState } from "react";
-
-interface Message {
-	id: number;
-	text: string;
-	sender: "user" | "bot";
-}
+import useChat from "@/hooks/useChat";
+import { useAuth } from "@clerk/nextjs";
+import { Box, TextField, Button, Typography, Paper } from "@mui/material";
 
 export const Chat: React.FC = () => {
-	const [messages, setMessages] = useState<Message[]>([]);
-	const [input, setInput] = useState<string>("");
-
-	const handleSend = () => {
-		if (input.trim()) {
-			const newMessage: Message = {
-				id: messages.length + 1,
-				text: input,
-				sender: "user",
-			};
-			setMessages([...messages, newMessage]);
-			setInput("");
-			// Simulate bot response
-			setTimeout(() => {
-				const botMessage: Message = {
-					id: messages.length + 2,
-					text: "This is a bot response",
-					sender: "bot",
-				};
-				setMessages((prevMessages) => [...prevMessages, botMessage]);
-			}, 1000);
-		}
-	};
+	const auth = useAuth();
+	const userId = auth.userId;
+	const { messages, input, setInput, handleSend } = useChat({ userId });
 
 	return (
-		<div className="chat-container">
-			<h1>Chat with me</h1>
-			<div className="messages">
+		<Paper
+			elevation={3}
+			sx={{ height: "100%", display: "flex", flexDirection: "column" }}
+		>
+			<Typography variant="h4" component="h1" sx={{ p: 2 }}>
+				Chat with me
+			</Typography>
+			<Box sx={{ flex: 1, overflowY: "auto", p: 2 }}>
 				{messages.map((message) => (
-					<div key={message.id} className={`message ${message.sender}`}>
-						{message.text}
-					</div>
+					<Box
+						key={message.id}
+						sx={{
+							mb: 1,
+							textAlign: message.sender === "user" ? "right" : "left",
+						}}
+					>
+						<Typography
+							variant="body1"
+							component="div"
+							sx={{
+								display: "inline-block",
+								p: 1,
+								borderRadius: 1,
+								bgcolor:
+									message.sender === "user" ? "primary.main" : "grey.300",
+								color:
+									message.sender === "user"
+										? "primary.contrastText"
+										: "text.primary",
+							}}
+						>
+							{message.text}
+						</Typography>
+					</Box>
 				))}
-			</div>
-			<div className="input-container">
-				<input
-					type="text"
+			</Box>
+			<Box sx={{ p: 2, display: "flex", alignItems: "center" }}>
+				<TextField
+					fullWidth
+					variant="outlined"
 					value={input}
 					onChange={(e) => setInput(e.target.value)}
 					onKeyPress={(e) => e.key === "Enter" && handleSend()}
+					sx={{ mr: 1 }}
 				/>
-				<button onClick={handleSend}>Send</button>
-			</div>
-		</div>
+				<Button variant="contained" color="primary" onClick={handleSend}>
+					Send
+				</Button>
+			</Box>
+		</Paper>
 	);
 };
 

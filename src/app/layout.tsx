@@ -11,6 +11,7 @@ const inter = Inter({
 });
 import "./layout.scss";
 import { CssBaseline } from "@mui/material";
+import { TRPCProvider } from "@/utils/trpc/client";
 
 export const metadata = Metadata;
 
@@ -31,15 +32,17 @@ const RootLayout = ({ children, header, footer, auth }: RoootLayoutProps) => (
 		</head>
 		<body className={inter.className}>
 			<ClerkProvider>
-				<AppRouterCacheProvider>
-					<CssBaseline />
-					<Theme>
-						{children}
-						{header}
-						{footer}
-						{auth}
-					</Theme>
-				</AppRouterCacheProvider>
+				<TRPCProvider>
+					<AppRouterCacheProvider>
+						<CssBaseline />
+						<Theme>
+							{children}
+							{header}
+							{footer}
+							{auth}
+						</Theme>
+					</AppRouterCacheProvider>
+				</TRPCProvider>
 			</ClerkProvider>
 		</body>
 	</html>

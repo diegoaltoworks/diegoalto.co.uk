@@ -112,6 +112,11 @@ describe("ContactForm component", () => {
 			await screen.getByTestId("server-working-message");
 			await expectErrors({ ...blankData } as ErrorData);
 			await waitFor(() =>
+				expect(
+					screen.getByTestId("server-working-message")
+				).not.toBeInTheDocument()
+			);
+			await waitFor(() =>
 				expect(screen.getByTestId("success-message")).toBeInTheDocument()
 			);
 			await screen.getByTestId("send-another-message");
