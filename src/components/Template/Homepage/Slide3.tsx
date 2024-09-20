@@ -4,15 +4,19 @@ import Icons from "@/components/Template/Icons";
 
 export default function Slide3() {
 	return (
-		<div className={styles.slide} data-testid="page-slide3">
-			<div role="heading" aria-level={1} data-testid="homepage-hello">
+		<div className={styles.slide} data-testid="homepage-slide" data-slide="3">
+			<div role="heading" aria-level={1}>
 				You can <Link href={"/contact"}>contact me here</Link>,
 			</div>
 			<div role="subheading" aria-level={2}>
-				<Link href="/login">login</Link> and <Link href="/chat">chat</Link>
+				<Link href="/register">register</Link>/<Link href="/login">login</Link>{" "}
+				to
+			</div>
+			<div role="subheading" aria-level={2}>
+				chat <Link href="/chat">chat</Link> with my AI bot
 			</div>
 			<div role="subheading" aria-level={3}>
-				with my AI bot (also on{" "}
+				(also on{" "}
 				<Link href="https://t.me/DiegoAlto">
 					<Icons.TelegramIcon /> Telegram
 				</Link>

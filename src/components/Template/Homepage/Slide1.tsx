@@ -3,8 +3,8 @@ import styles from "./Slides.module.scss";
 
 export default function Slide1() {
 	return (
-		<div className={styles.slide} data-testid="page-slide1">
-			<div role="heading" aria-level={1} data-testid="homepage-hello">
+		<div className={styles.slide} data-testid="homepage-slide" data-slide="1">
+			<div role="heading" aria-level={1}>
 				Olá!
 			</div>
 			<div role="subheading" aria-level={2} className={styles.bigun}>

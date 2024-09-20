@@ -1,22 +1,23 @@
 .slide {
 	justify-content: space-around;
 	align-items: center;
+	padding: 10rem 0;
 
-	&[data-testid="page-slide1"] {
+	&[data-slide="1"] {
 		color: darkblue;
 		a {
 			color: darkblue;
 		}
 		font-weight: bold;
 	}
-	&[data-testid="page-slide2"] {
+	&[data-slide="2"] {
 		color: darkgreen;
 		a {
 			color: darkgreen;
 		}
 		font-weight: bold;
 	}
-	&[data-testid="page-slide3"] {
+	&[data-slide="3"] {
 		color: darkred;
 		a {
 			color: darkred;

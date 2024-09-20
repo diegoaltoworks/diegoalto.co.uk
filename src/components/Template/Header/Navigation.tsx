@@ -10,11 +10,11 @@ import { usePathname } from "next/navigation";
 
 export const Navigation: React.FC = () => {
 	const pathname = usePathname();
-	const [state, setState] = React.useState<{ open: boolean }>({ open: false });
-	useBodyClass(state.open ? ["navigation-is-open"] : []);
+	const [open, setOpen] = React.useState<boolean>(false);
+	useBodyClass(open ? ["navigation-is-open"] : []);
 
 	const toggleDrawer =
-		(open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+		(state: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
 			if (
 				event &&
 				event.type === "keydown" &&
@@ -23,15 +23,17 @@ export const Navigation: React.FC = () => {
 			) {
 				return;
 			}
-
-			setState({ ...state, open });
+			setOpen(state);
 		};
-	const closeDrawerIfCurrent = (event: React.SyntheticEvent) => {
-		if (
-			event.target instanceof HTMLElement &&
-			event.target.closest("a")?.getAttribute("href") === pathname
-		) {
-			toggleDrawer(false);
+
+	const closeDrawerIfLink = (event: React.SyntheticEvent) => {
+		if (!(event.target instanceof HTMLElement)) return;
+		const link = event.target.closest("a");
+		const href = link?.getAttribute("href");
+		const curr = href === pathname;
+		const button = !link && event.target.closest("button");
+		if (link || button) {
+			setOpen(false);
 		}
 	};
 
@@ -44,7 +46,7 @@ export const Navigation: React.FC = () => {
 					color="inherit"
 					aria-haspopup="true"
 					aria-controls="menu"
-					aria-expanded={state.open}
+					aria-expanded={open}
 					data-testid="open-menu-button"
 					sx={{ lf: 2 }}
 					onClick={toggleDrawer(true)}
@@ -55,10 +57,12 @@ export const Navigation: React.FC = () => {
 
 			<Drawer
 				anchor={"right"}
-				open={state.open}
+				open={open}
 				onClose={toggleDrawer(false)}
 				//onOpen={toggleDrawer(true)}
-				onClickCapture={closeDrawerIfCurrent}
+				//onClickCapture={toggleDrawer(false)}
+				//onClickCapture={closeDrawerIfCurrent}
+				onClickCapture={closeDrawerIfLink}
 			>
 				<Box
 					sx={{

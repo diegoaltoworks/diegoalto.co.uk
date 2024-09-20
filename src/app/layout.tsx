@@ -4,7 +4,11 @@ import { Inter } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Theme } from "@/components/Template/Theme";
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+	subsets: ["latin"],
+	display: "swap",
+	adjustFontFallback: false,
+});
 import "./layout.scss";
 import { CssBaseline } from "@mui/material";
 

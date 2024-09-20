@@ -5,7 +5,7 @@ import Slide3 from "./Homepage/Slide3";
 
 export const Homepage = () => {
 	return (
-		<main className={styles.slide} data-testid="page-body">
+		<main className={styles.slide} data-testid="homepage-slides">
 			<Slide1 />
 			<Slide2 />
 			<Slide3 />

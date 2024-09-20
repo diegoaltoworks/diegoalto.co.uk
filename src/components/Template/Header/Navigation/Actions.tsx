@@ -67,6 +67,7 @@ export const Actions: React.FC = () => {
 					value={link}
 					label={text}
 					icon={icon}
+					data-testid={`action-${link}`}
 				/>
 			))}
 		</BottomNavigation>
