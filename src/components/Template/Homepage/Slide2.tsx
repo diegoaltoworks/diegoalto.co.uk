@@ -11,7 +11,7 @@ export default function Slide2() {
 				<Link href="/projects">projects</Link>
 			</div>
 			<div role="subheading" aria-level={3}>
-				I've open-sourced on{" "}
+				I{`'`}ve open-sourced on{" "}
 				<Link href="https://github.com/diegoaltoworks">my github profile</Link>
 			</div>
 		</div>
