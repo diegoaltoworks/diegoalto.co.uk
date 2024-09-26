@@ -2,7 +2,18 @@
 const { withSentryConfig } = require("@sentry/nextjs");
 const { env } = require("./next.config.env.js");
 
-const nextConfig = {};
+const nextConfig = {
+	images: {
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "avatars.githubusercontent.com",
+				port: "",
+				pathname: "/**",
+			},
+		],
+	},
+};
 const sentryConfig = {
 	// For all available options, see:
 	// https://github.com/getsentry/sentry-webpack-plugin#options
