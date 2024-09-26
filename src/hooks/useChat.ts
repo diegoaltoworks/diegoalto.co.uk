@@ -38,12 +38,11 @@ export const useChat = ({ userId }: UseChatHookProps) => {
 			loadChat(storedChatId);
 			return;
 		}
-		console.log("Creating chat...", { messages, input, chatId });
 		client.chat.create.mutate({
 			userId,
 			title: "Chat started at " + new Date().toLocaleString(),
 		});
-	}, []);
+	}, [chatId, userId, client.chat.create]);
 
 	useEffect(() => {
 		const chatId = client.chat.create.data?.chatId;
