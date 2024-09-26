@@ -11,11 +11,15 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "check-types": "tsc --noEmit --pretty",
-    "test": "vitest",
+    "test:ci": "npm run test && npm run test:e2e",
+    "test": "vitest --run",
+    "test:watch": "vitest",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
 		"seed": "node prisma/seed.js",
-    "reset": "rm -rf node_modules package-json.lock && npm i"
+    "reset": "rm -rf node_modules package-json.lock && npm i",
+    "lint-staged": "lint-staged",
+    "prepare": "husky"
   },
   "dependencies": {
     "@clerk/nextjs": "^5.6.0",
@@ -56,6 +60,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
     "@faker-js/faker": "^9.0.0",
     "@playwright/test": "^1.47.0",
     "@tanstack/eslint-plugin-query": "^5.53.0",
@@ -71,8 +77,11 @@
     "dotenv": "^16.4.5",
     "eslint": "8.57.0",
     "eslint-config-next": "14.2.7",
+    "husky": "^9.1.6",
     "jsdom": "^25.0.0",
+    "lint-staged": "^15.2.10",
     "next-router-mock": "^0.9.13",
+    "prettier": "^3.3.3",
     "ts-node": "^10.9.2",
     "vitest": "^2.0.5"
   }

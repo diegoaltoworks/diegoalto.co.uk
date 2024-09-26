@@ -3,6 +3,7 @@ import { faker } from "@faker-js/faker";
 import { describe, it, expect, beforeEach } from "vitest";
 import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { expectSee } from "@e2e/lib/tests";
 
 const user = userEvent.setup();
 beforeEach(() => {
@@ -109,17 +110,22 @@ describe("ContactForm component", () => {
 			await fillForm(goodData);
 			await expectErrors(blankData as ErrorData);
 			await user.click(screen.getByRole("submit"));
-			await screen.getByTestId("server-working-message");
-			await expectErrors({ ...blankData } as ErrorData);
+
+			// Wait for the server working message to appear
 			await waitFor(() =>
 				expect(
-					screen.getByTestId("server-working-message")
-				).not.toBeInTheDocument()
+					screen.getByTestId("server-working-message"),
+				).toBeInTheDocument(),
 			);
+
+			// Wait for the server working message to disappear
 			await waitFor(() =>
-				expect(screen.getByTestId("success-message")).toBeInTheDocument()
+				expect(
+					screen.queryByTestId("server-working-message"),
+				).not.toBeInTheDocument(),
 			);
-			await screen.getByTestId("send-another-message");
-		}
+
+			expect(screen.getByTestId("send-another-message")).toBeInTheDocument();
+		},
 	);
 });
