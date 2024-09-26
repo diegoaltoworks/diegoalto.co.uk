@@ -21,15 +21,17 @@ export const chatRouter = router({
 		create: protectedProcedure
 			.input(
 				z.object({
+					id: z.string().optional(),
 					title: z.string(),
 					userId: z.string(),
-				})
+				}),
 			)
 			.output(z.object({ chatId: z.string() }))
 			.mutation(async (opts) => {
 				const { input } = opts;
 				const result = await prisma.chat.create({
 					data: {
+						id: input.id || UUID(),
 						title: "Chat started at " + new Date().toLocaleString(),
 						userId: input.userId,
 						// createdAt: new Date(), // Remove this line as it is not a known property
@@ -42,7 +44,7 @@ export const chatRouter = router({
 				z.object({
 					chatId: z.string(),
 					userId: z.string(),
-				})
+				}),
 			)
 			.output(
 				z.object({
@@ -56,9 +58,9 @@ export const chatRouter = router({
 							chat: z.any(),
 							createdAt: z.date(),
 							updatedAt: z.date(),
-						})
+						}),
 					),
-				})
+				}),
 			)
 			.query(async (opts) => {
 				const { input } = opts;
@@ -80,7 +82,7 @@ export const chatRouter = router({
 					userId: z.string(),
 					text: z.string(),
 					sender: z.string().optional(),
-				})
+				}),
 			)
 			.mutation(async (opts) => {
 				const { input } = opts;
@@ -92,7 +94,45 @@ export const chatRouter = router({
 						chat: { connect: { id: input.chatId } },
 					},
 				});
-				return { chatId: result.id };
+				return { chatId: input.chatId, messageId: result.id };
+			}),
+		load: protectedProcedure
+			.input(
+				z.object({
+					chatId: z.string(),
+					userId: z.string(),
+				}),
+			)
+			.output(
+				z.object({
+					messages: z.array(
+						z.object({
+							id: z.string(),
+							text: z.string(),
+							sender: z.string(),
+							userId: z.string(),
+							chatId: z.string(),
+							chat: z.any(),
+							createdAt: z.date(),
+							updatedAt: z.date(),
+						}),
+					),
+				}),
+			)
+			.query(async (opts) => {
+				const { input } = opts;
+
+				//TODO: TBC verify chat still exists / open / is accessible
+				const chat = await prisma.message.findUnique({
+					where: { id: input.chatId, userId: input.userId },
+				});
+				if (!chat) throw new Error("Chat not found");
+
+				// rreturn messages
+				const messages = await prisma.message.findMany({
+					where: { chatId: input.chatId },
+				});
+				return { messages };
 			}),
 	}),
 });

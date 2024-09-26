@@ -1,12 +1,17 @@
 "use client";
 import useChat from "@/hooks/useChat";
+import useChatMessage from "@/hooks/useChatMessage";
 import { useAuth } from "@clerk/nextjs";
 import { Box, TextField, Button, Typography, Paper } from "@mui/material";
 
 export const Chat: React.FC = () => {
 	const auth = useAuth();
-	const userId = auth.userId;
-	const { messages, input, setInput, handleSend } = useChat({ userId });
+	const userId = auth.userId ?? null;
+	const { chatId } = useChat({ userId });
+	const { messages, input, setInput, handleSend } = useChatMessage({
+		userId,
+		chatId,
+	});
 
 	return (
 		<Paper
