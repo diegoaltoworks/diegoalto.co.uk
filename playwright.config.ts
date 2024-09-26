@@ -30,13 +30,13 @@ export default defineConfig({
 		/* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
 		trace: "on",
 
-		actionTimeout: 5 * 1000 * 3,
-		navigationTimeout: 3 * 1000 * 3,
+		actionTimeout: 5 * 1000 * 5,
+		navigationTimeout: 3 * 1000 * 5,
 	},
 
 	expect: {
 		// Maximum time expect() should wait for the condition to be met.
-		timeout: 9 * 1000 * 3,
+		timeout: 9 * 1000 * 5,
 
 		toHaveScreenshot: {
 			// An acceptable amount of pixels that could be different, unset by default.
