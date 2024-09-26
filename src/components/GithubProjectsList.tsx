@@ -13,6 +13,7 @@ import { Typography } from "@mui/material";
 import { CardActions } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import Link from "next/link";
+import Image from "next/image";
 
 type GithugProjectsProps = {
 	username: string;
@@ -77,7 +78,7 @@ const ProjectCard: React.FC<GithugProjectCardProps> = ({ project }) => {
 		<Card key={project.id}>
 			<CardContent sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
 				<Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-					<img
+					<Image
 						height="20"
 						width="20"
 						style={{ clipPath: "circle()" }}
