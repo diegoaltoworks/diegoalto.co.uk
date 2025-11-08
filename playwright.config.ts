@@ -96,5 +96,8 @@ export default defineConfig({
 		stdout: "ignore",
 		stderr: "pipe",
 		timeout: 30 * 1000,
+		env: {
+			NEXT_PUBLIC_E2E_TEST: "true",
+		},
 	},
 });

@@ -1,5 +1,5 @@
-import { Chat } from "@/components/Chat";
+import { DiegoBotChat } from "@/components/DiegoBotChat";
 
 export default function Page() {
-	return <Chat />;
+	return <DiegoBotChat />;
 }

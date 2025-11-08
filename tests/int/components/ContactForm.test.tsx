@@ -119,10 +119,12 @@ describe("ContactForm component", () => {
 			);
 
 			// Wait for the server working message to disappear
-			await waitFor(() =>
-				expect(
-					screen.queryByTestId("server-working-message"),
-				).not.toBeInTheDocument(),
+			await waitFor(
+				() =>
+					expect(
+						screen.queryByTestId("server-working-message"),
+					).not.toBeInTheDocument(),
+				{ timeout: 10000 }, // Increase timeout for real API call
 			);
 
 			expect(screen.getByTestId("send-another-message")).toBeInTheDocument();
