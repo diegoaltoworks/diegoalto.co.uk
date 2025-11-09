@@ -80,11 +80,23 @@ export default defineConfig({
 		/* Test against branded browsers. */
 		{
 			name: "Microsoft Edge",
-			use: { ...devices["Desktop Edge"], channel: "msedge" },
+			use: {
+				...devices["Desktop Edge"],
+				channel: "msedge",
+				launchOptions: {
+					args: ["--headless=new"],
+				},
+			},
 		},
 		{
 			name: "Google Chrome",
-			use: { ...devices["Desktop Chrome"], channel: "chrome" },
+			use: {
+				...devices["Desktop Chrome"],
+				channel: "chrome",
+				launchOptions: {
+					args: ["--headless=new"],
+				},
+			},
 		},
 	],
 
