@@ -1,5 +1,7 @@
 "use client";
+
 import { useEffect, useRef } from "react";
+
 import type { ChatButtonInstance } from "@/types/fyne";
 
 export const DiegoBotButton: React.FC = () => {

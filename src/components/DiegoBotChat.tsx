@@ -1,5 +1,7 @@
 "use client";
+
 import { useEffect, useRef } from "react";
+
 import { Box } from "@mui/material";
 import type { ChatInstance } from "@/types/fyne";
 
