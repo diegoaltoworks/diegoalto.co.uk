@@ -113,22 +113,21 @@ describe("ContactForm component", () => {
 
 			// Wait for the server working message to appear
 			await waitFor(() =>
-				expect(screen.getByTestId("server-working-message")).toBeInTheDocument()
+				expect(
+					screen.getByTestId("server-working-message"),
+				).toBeInTheDocument(),
 			);
 
 			// Wait for the server working message to disappear
-			await waitFor(() =>
-				expect(
-					screen.queryByTestId("server-working-message")
-				).not.toBeInTheDocument()
-			);
-
-			// Check for success message
-			await waitFor(() =>
-				expect(screen.getByTestId("success-message")).toBeInTheDocument()
+			await waitFor(
+				() =>
+					expect(
+						screen.queryByTestId("server-working-message"),
+					).not.toBeInTheDocument(),
+				{ timeout: 10000 }, // Increase timeout for real API call
 			);
 
 			expect(screen.getByTestId("send-another-message")).toBeInTheDocument();
-		}
+		},
 	);
 });

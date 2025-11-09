@@ -28,7 +28,11 @@ const fetchProjects = async ({ username }: GithugProjectsProps) => {
 	const data = await response.json();
 	const projects = data.filter(
 		(project: any) =>
-			!(project.fork || project.name === username || project.name === ".github")
+			!(
+				project.fork ||
+				project.name === username ||
+				project.name === ".github"
+			),
 	);
 	return projects;
 };

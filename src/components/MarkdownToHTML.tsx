@@ -26,6 +26,7 @@ const MarkdownToHTMLBody: React.FC<MarkdownToHTMLProps> = async ({ url }) => {
 		<div
 			dangerouslySetInnerHTML={{ __html: html }}
 			data-testid="markdown-html"
+			className={"prose"}
 		/>
 	);
 };

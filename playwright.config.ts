@@ -80,11 +80,23 @@ export default defineConfig({
 		/* Test against branded browsers. */
 		{
 			name: "Microsoft Edge",
-			use: { ...devices["Desktop Edge"], channel: "msedge" },
+			use: {
+				...devices["Desktop Edge"],
+				channel: "msedge",
+				launchOptions: {
+					args: ["--headless=new"],
+				},
+			},
 		},
 		{
 			name: "Google Chrome",
-			use: { ...devices["Desktop Chrome"], channel: "chrome" },
+			use: {
+				...devices["Desktop Chrome"],
+				channel: "chrome",
+				launchOptions: {
+					args: ["--headless=new"],
+				},
+			},
 		},
 	],
 
@@ -96,5 +108,8 @@ export default defineConfig({
 		stdout: "ignore",
 		stderr: "pipe",
 		timeout: 30 * 1000,
+		env: {
+			NEXT_PUBLIC_E2E_TEST: "true",
+		},
 	},
 });
