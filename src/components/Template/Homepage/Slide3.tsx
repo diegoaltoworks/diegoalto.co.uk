@@ -1,10 +1,15 @@
 import Link from "next/link";
-import styles from "./Slides.module.scss";
+import BackgroundSlide from "./BackgroundSlide";
 import { Tooltip } from "@mui/material";
 
 export default function Slide3() {
 	return (
-		<div className={styles.slide} data-testid="homepage-slide" data-slide="3">
+		<BackgroundSlide
+			slideNumber={3}
+			imageSrc="/backgrounds/rio.jpg"
+			imageAlt="Rio de Janeiro beach at sunset with vibrant sky"
+			priority={false}
+		>
 			<div role="heading" aria-level={1}>
 				You can <Link href={"/contact"}>contact me here</Link>.
 			</div>
@@ -32,6 +37,6 @@ export default function Slide3() {
 				</Link>
 				)
 			</div>
-		</div>
+		</BackgroundSlide>
 	);
 }

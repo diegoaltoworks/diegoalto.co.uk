@@ -1,9 +1,15 @@
 import Link from "next/link";
+import BackgroundSlide from "./BackgroundSlide";
 import styles from "./Slides.module.scss";
 
 export default function Slide1() {
 	return (
-		<div className={styles.slide} data-testid="homepage-slide" data-slide="1">
+		<BackgroundSlide
+			slideNumber={1}
+			imageSrc="/backgrounds/swiss.jpg"
+			imageAlt="Swiss Alps landscape with mountain peaks and serene lake"
+			priority={true}
+		>
 			<div role="heading" aria-level={1}>
 				Olá!
 			</div>
@@ -16,6 +22,6 @@ export default function Slide1() {
 					software engineer from London
 				</Link>
 			</div>
-		</div>
+		</BackgroundSlide>
 	);
 }

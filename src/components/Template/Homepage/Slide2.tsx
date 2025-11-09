@@ -1,9 +1,15 @@
 import Link from "next/link";
+import BackgroundSlide from "./BackgroundSlide";
 import styles from "./Slides.module.scss";
 
 export default function Slide2() {
 	return (
-		<div className={styles.slide} data-testid="homepage-slide" data-slide="2">
+		<BackgroundSlide
+			slideNumber={2}
+			imageSrc="/backgrounds/japan.jpg"
+			imageAlt="Japanese torii gate at sunset with Mount Fuji in background"
+			priority={false}
+		>
 			<div role="heading" aria-level={1}>
 				Checkout some of the
 			</div>
@@ -14,6 +20,6 @@ export default function Slide2() {
 				I{`'`}ve open-sourced on{" "}
 				<Link href="https://github.com/diegoaltoworks">my github profile</Link>
 			</div>
-		</div>
+		</BackgroundSlide>
 	);
 }
