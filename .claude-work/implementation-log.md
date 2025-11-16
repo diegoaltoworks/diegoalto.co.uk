@@ -6,8 +6,8 @@
 
 ### 1. Root Layout (`src/app/layout.tsx`)
 **Changes:**
-- Added diegobot CDN stylesheet link: `https://bot.diegoalto.app/chatbot.css`
-- Added diegobot CDN script: `https://bot.diegoalto.app/chatbot.min.js` (async)
+- Added diegobot CDN stylesheet link: `https://bot.diegoalto.app/chatter.css`
+- Added diegobot CDN script: `https://bot.diegoalto.app/chatter.js` (async)
 - Imported and added `<DiegoBotButton />` component to render tree
 
 **Purpose:** Makes the Fyne chatbot library available globally and adds floating chat button to all pages

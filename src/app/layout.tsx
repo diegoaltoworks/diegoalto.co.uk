@@ -1,18 +1,20 @@
-import React from "react";
-import Metadata from "@/lib/metadata";
-import { Inter } from "next/font/google";
+import "./layout.scss";
+
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ClerkProvider } from "@clerk/nextjs";
-import { Theme } from "@/components/Template/Theme";
+import { CssBaseline } from "@mui/material";
 import { DiegoBotButton } from "@/components/DiegoBotButton";
+import { Inter } from "next/font/google";
+import Metadata from "@/lib/metadata";
+import React from "react";
+import { TRPCProvider } from "@/utils/trpc/client";
+import { Theme } from "@/components/Template/Theme";
+
 const inter = Inter({
 	subsets: ["latin"],
 	display: "swap",
 	adjustFontFallback: false,
 });
-import "./layout.scss";
-import { CssBaseline } from "@mui/material";
-import { TRPCProvider } from "@/utils/trpc/client";
 
 export const metadata = Metadata;
 
@@ -37,12 +39,9 @@ const RootLayout = ({ children, header, footer, auth }: RoootLayoutProps) => {
 					<>
 						<link
 							rel="stylesheet"
-							href="https://bot.diegoalto.app/chatbot.css"
+							href="https://bot.diegoalto.app/chatter.css"
 						></link>
-						<script
-							src="https://bot.diegoalto.app/chatbot.min.js"
-							async
-						></script>
+						<script src="https://bot.diegoalto.app/chatter.js" async></script>
 					</>
 				)}
 			</head>

@@ -19,8 +19,8 @@ Integrate the diegobot chat client from https://bot.diegoalto.app/ into the dieg
 ### DiegoBot API
 - **Host**: bot.diegoalto.app
 - **CDN**:
-  - Script: `https://bot.diegoalto.app/chatbot.min.js`
-  - Styles: `https://bot.diegoalto.app/chatbot.css`
+  - Script: `https://bot.diegoalto.app/chatter.js`
+  - Styles: `https://bot.diegoalto.app/chatter.css`
 - **Library**: `@fyne/chatbot` (available via CDN as `Fyne` global)
 - **Components**:
   - `ChatBot` - API client only

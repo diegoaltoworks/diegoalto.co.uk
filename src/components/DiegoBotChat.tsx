@@ -14,13 +14,13 @@ export const DiegoBotChat: React.FC = () => {
 		const initChat = () => {
 			if (
 				typeof window !== "undefined" &&
-				window.Fyne?.Chat &&
+				window.Chatter?.Chat &&
 				containerRef.current
 			) {
 				// Only initialize if not already done
 				if (!chatRef.current) {
 					const apiKey = process.env.NEXT_PUBLIC_DIEGOBOT_API_KEY;
-					chatRef.current = new window.Fyne.Chat({
+					chatRef.current = new window.Chatter.Chat({
 						host: "bot.diegoalto.app",
 						mode: "public",
 						...(apiKey && { apiKey }),
@@ -33,13 +33,13 @@ export const DiegoBotChat: React.FC = () => {
 			}
 		};
 
-		// Check if Fyne is already loaded
-		if (window.Fyne) {
+		// Check if Chatter is already loaded
+		if (window.Chatter) {
 			initChat();
 		} else {
 			// Wait for script to load
 			const checkInterval = setInterval(() => {
-				if (window.Fyne) {
+				if (window.Chatter) {
 					clearInterval(checkInterval);
 					initChat();
 				}

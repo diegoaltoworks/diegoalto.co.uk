@@ -1,5 +1,5 @@
 // Type definitions for Fyne chatbot library
-// Loaded via CDN: https://bot.diegoalto.app/chatbot.min.js
+// Loaded via CDN: https://bot.diegoalto.app/chatter.js
 
 export interface ChatMessage {
 	role: "user" | "assistant";
@@ -68,7 +68,7 @@ export interface ChatButtonInstance {
 
 declare global {
 	interface Window {
-		Fyne?: {
+		Chatter?: {
 			ChatBot: new (config: ChatBotConfig) => ChatBotInstance;
 			Chat: new (config: ChatConfig) => ChatInstance;
 			ChatButton: new (config: ChatButtonConfig) => ChatButtonInstance;

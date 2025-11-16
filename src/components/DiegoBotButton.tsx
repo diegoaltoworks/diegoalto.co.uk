@@ -10,11 +10,11 @@ export const DiegoBotButton: React.FC = () => {
 	useEffect(() => {
 		// Function to initialize the chat button
 		const initChatButton = () => {
-			if (typeof window !== "undefined" && window.Fyne?.ChatButton) {
+			if (typeof window !== "undefined" && window.Chatter?.ChatButton) {
 				// Only initialize if not already done
 				if (!chatButtonRef.current) {
 					const apiKey = process.env.NEXT_PUBLIC_DIEGOBOT_API_KEY;
-					chatButtonRef.current = new window.Fyne.ChatButton({
+					chatButtonRef.current = new window.Chatter.ChatButton({
 						host: "bot.diegoalto.app",
 						mode: "public",
 						...(apiKey && { apiKey }),
@@ -30,13 +30,13 @@ export const DiegoBotButton: React.FC = () => {
 			}
 		};
 
-		// Check if Fyne is already loaded
-		if (window.Fyne) {
+		// Check if Chatter is already loaded
+		if (window.Chatter) {
 			initChatButton();
 		} else {
 			// Wait for script to load
 			const checkInterval = setInterval(() => {
-				if (window.Fyne) {
+				if (window.Chatter) {
 					clearInterval(checkInterval);
 					initChatButton();
 				}
